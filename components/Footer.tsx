@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { getSiteSettings } from '@/sanity/queries'
 
 const footerLinks = [
   { href: '/projeler', label: 'Projects' },
@@ -12,13 +13,18 @@ const legalLinks = [
   { href: '/kullanim-kosullari', label: 'Terms of Service' },
 ]
 
-const socialLinks = [
-  { href: 'https://www.instagram.com/dimaredesign', label: 'Instagram' },
-  { href: 'https://www.pinterest.com/dimaredesign', label: 'Pinterest' },
-  { href: 'https://www.etsy.com/shop/dimaredesign', label: 'Etsy' },
-]
+export default async function Footer() {
+  const settings = await getSiteSettings()
 
-export default function Footer() {
+  const socialLinks = [
+    settings?.instagramUrl && { href: settings.instagramUrl, label: 'Instagram' },
+    settings?.pinterestUrl && { href: settings.pinterestUrl, label: 'Pinterest' },
+    settings?.etsyUrl && { href: settings.etsyUrl, label: 'Etsy' },
+    settings?.shopifyUrl && { href: settings.shopifyUrl, label: 'Shopify' },
+  ].filter(Boolean) as { href: string; label: string }[]
+
+  const contactEmail = settings?.contactEmail ?? 'info@dimare.design'
+
   return (
     <footer className="border-t border-espresso/10 bg-linen-dark">
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 py-20">
@@ -52,13 +58,18 @@ export default function Footer() {
           <div>
             <p className="text-[10px] tracking-widest uppercase text-gold mb-6">Connect</p>
             <nav className="flex flex-col gap-3 mb-8">
-              {socialLinks.map((link) => (
+              {socialLinks.length > 0 ? socialLinks.map((link) => (
                 <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
                   className="text-xs text-espresso/40 hover:text-gold transition-colors duration-300 font-light flex items-center gap-2 group">
                   <span className="w-3 h-px bg-gold/30 group-hover:w-5 group-hover:bg-gold transition-all duration-300" />
                   {link.label}
                 </a>
-              ))}
+              )) : (
+                <a href={`mailto:${contactEmail}`}
+                  className="text-xs text-espresso/40 hover:text-gold transition-colors duration-300 font-light">
+                  {contactEmail}
+                </a>
+              )}
             </nav>
             <Link href="/iletisim"
               className="inline-flex items-center gap-3 text-[10px] tracking-widest uppercase text-gold border-b border-gold/30 pb-0.5 hover:border-gold transition-colors duration-300">
