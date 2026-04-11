@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import ConversionEvents from '@/components/ConversionEvents'
 
 export const metadata: Metadata = {
   title: 'Thank You | DiMare Design',
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function TesekkurlerPage() {
   return (
     <section className="min-h-screen flex items-center justify-center px-6 bg-linen-light">
+      <ConversionEvents />
       <div className="text-center max-w-lg">
         <div className="w-16 h-16 rounded-full border border-gold/30 flex items-center justify-center mx-auto mb-10">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-gold">

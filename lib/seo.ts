@@ -4,9 +4,9 @@ export const siteConfig = {
   description:
     'Dimare Design crafts bespoke macramé, handwoven textiles and bohemian outdoor furniture for luxury hotels and resorts worldwide. Trusted by Rixos, TUI, Regnum Carya and leading Mediterranean resorts.',
   url: 'https://www.dimare.design',
-  locale: 'tr_TR',
-  localeAlt: 'en_US',
-  ogImage: 'https://www.dimare.design/og-image.jpg',
+  locale: 'en_US',
+  localeAlt: 'tr_TR',
+  ogImage: 'https://www.dimare.design/opengraph-image',
   twitter: '@dimaredesign',
   address: {
     country: 'Turkey',

@@ -39,14 +39,11 @@ export const metadata: Metadata = {
     canonical: siteConfig.url,
     languages: { 'tr': siteConfig.url, 'en': `${siteConfig.url}/en` },
   },
-  verification: {
-    google: 'YOUR_GOOGLE_VERIFICATION_CODE',
-  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr" className="noise">
+    <html lang="en" className="noise">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
