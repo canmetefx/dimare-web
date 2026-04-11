@@ -3,54 +3,26 @@ import Link from 'next/link'
 import Image from 'next/image'
 import AnimateOnScroll from '@/components/AnimateOnScroll'
 import { siteConfig } from '@/lib/seo'
+import { getFeaturedProducts, getFeaturedProjects, getSiteSettings } from '@/sanity/queries'
+import { sanityImageUrl } from '@/lib/sanity-image'
+
+export const revalidate = 300
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} — ${siteConfig.tagline}`,
   description: siteConfig.description,
 }
 
-const clients = [
+const fallbackClients = [
   'Rixos Hotels', 'TUI', 'Regnum Carya', 'Vogue Supreme Bodrum',
   'Gloria Hotels', 'Hilton', 'Marriott', 'Kempinski',
-  'Rixos Hotels', 'TUI', 'Regnum Carya', 'Vogue Supreme Bodrum',
 ]
 
-const products = [
-  { id: 1, title: 'Coastal Macramé', subtitle: 'Duvar Sanatı', image: '/images/product-1.avif' },
-  { id: 2, title: 'Bohemian Swing', subtitle: 'Dış Mekan', image: '/images/product-2.avif' },
-  { id: 3, title: 'Woven Canopy', subtitle: 'Tavan Örtüsü', image: '/images/product-3.avif' },
-  { id: 4, title: 'Terra Hammock', subtitle: 'Hamak Serisi', image: '/images/product-4.avif' },
-]
-
-const projects = [
-  {
-    id: 1,
-    name: 'Vogue Supreme Bodrum',
-    category: 'Pool Deck & Cabanas',
-    image: '/images/project-1.avif',
-    year: '2024',
-  },
-  {
-    id: 2,
-    name: 'Rixos Premium',
-    category: 'Lobby & Spa Installation',
-    image: '/images/project-2.avif',
-    year: '2023',
-  },
-  {
-    id: 3,
-    name: 'Regnum Carya',
-    category: 'Beach Club Decor',
-    image: '/images/project-3.avif',
-    year: '2023',
-  },
-]
-
-const stats = [
-  { value: '150+', label: 'Tamamlanan Proje' },
-  { value: '40+', label: 'Lüks Otel' },
-  { value: '12', label: 'Ülke' },
-  { value: '8', label: 'Yıl Deneyim' },
+const fallbackStats = [
+  { value: '150+', label: 'Completed Projects' },
+  { value: '40+', label: 'Luxury Hotels' },
+  { value: '12', label: 'Countries' },
+  { value: '8', label: 'Years Experience' },
 ]
 
 const faqSchema = {
@@ -59,96 +31,104 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'Lüks oteller için özel makrome sipariş verebilir miyim?',
+      name: 'Can I order custom macramé for my luxury hotel?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Evet. Dimare Design, lüks otel ve tatil köyleri için tamamen özelleştirilmiş makrome ve bohemian dekor projeleri üretmektedir. Ölçü, renk ve malzeme seçenekleri için bizimle iletişime geçin.',
+        text: 'Yes. DiMare Design creates fully customised macramé and bohemian décor for luxury hotels and resorts. Contact us with your dimensions, colour palette, and material preferences.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Hangi oteller ile çalıştınız?',
+      name: 'Which hotels have you worked with?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Rixos Hotels, TUI, Regnum Carya, Vogue Supreme Bodrum, Gloria Hotels gibi önde gelen lüks otel zincirleriyle projeler gerçekleştirdik.',
+        text: 'We have completed projects for leading luxury hotel groups including Rixos Hotels, TUI, Regnum Carya, Vogue Supreme Bodrum, and Gloria Hotels.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Teslimat süresi ne kadardır?',
+      name: 'What is the lead time for a bespoke project?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Proje büyüklüğüne göre değişmekle birlikte ortalama 4-8 hafta üretim ve teslimat süresi öngörülmektedir. Acil projeler için özel çözümler sunmaktayız.',
+        text: 'Lead times vary by project scope, but we typically estimate 4–8 weeks for production and delivery. Rush solutions are available for urgent projects.',
       },
     },
   ],
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [settings, featuredProducts, featuredProjects] = await Promise.all([
+    getSiteSettings(),
+    getFeaturedProducts(),
+    getFeaturedProjects(),
+  ])
+
+  const clients = settings?.hotelClients?.length
+    ? settings.hotelClients.map((c: { name: string }) => c.name)
+    : fallbackClients
+
+  const marqueeClients = [...clients, ...clients]
+
+  const stats = settings?.stats?.length ? settings.stats : fallbackStats
+
+  const heroImageUrl = settings?.heroImage
+    ? sanityImageUrl(settings.heroImage, 1920, 1080)
+    : null
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* ── HERO ─────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-end pb-20 md:pb-32 overflow-hidden">
-        {/* Background */}
+      <section className="relative min-h-screen flex items-end pb-20 md:pb-32 overflow-hidden bg-linen">
         <div className="absolute inset-0">
-          <Image
-            src="/images/hero-bg.avif"
-            alt="Dimare Design lüks otel dekor — bohemian makrome ve el yapımı mobilya"
-            fill
-            priority
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-obsidian/10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-obsidian/60 to-transparent" />
+          {heroImageUrl ? (
+            <Image
+              src={heroImageUrl}
+              alt="DiMare Design luxury hotel décor — bohemian macramé and handcrafted furniture"
+              fill priority className="object-cover object-center" sizes="100vw"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-espresso via-espresso-light to-linen-dark" />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-espresso/50 to-transparent" />
         </div>
 
-        {/* Content */}
         <div className="relative z-10 max-w-screen-xl mx-auto px-6 md:px-12 w-full">
           <div className="max-w-2xl">
             <AnimateOnScroll delay={200}>
-              <span className="inline-flex items-center gap-3 text-[10px] tracking-widest3 uppercase text-gold mb-8">
-                <span className="w-8 h-px bg-gold" />
+              <span className="inline-flex items-center gap-3 text-[10px] tracking-widest3 uppercase text-gold-light mb-8">
+                <span className="w-8 h-px bg-gold-light" />
                 Handcrafted in Turkey
               </span>
             </AnimateOnScroll>
-
             <AnimateOnScroll delay={350}>
               <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-light leading-[0.95] tracking-tight text-cream-light mb-8">
-                Lüks Oteller
+                Artisan Décor
                 <br />
-                <em className="gold-text not-italic">İçin Sanat.</em>
+                <em className="gold-text not-italic">for Luxury.</em>
               </h1>
             </AnimateOnScroll>
-
             <AnimateOnScroll delay={500}>
-              <p className="text-cream/50 text-sm md:text-base font-light leading-relaxed mb-12 max-w-md">
-                El yapımı makrome, dokuma tekstil ve bohemian mobilyalarla mekânınızı unutulmaz kılıyoruz. Her parça, markanızın ruhunu yansıtır.
+              <p className="text-cream/60 text-sm md:text-base font-light leading-relaxed mb-12 max-w-md">
+                Handcrafted macramé, woven textiles, and bohemian furniture — transforming hotel spaces into unforgettable experiences.
               </p>
             </AnimateOnScroll>
-
             <AnimateOnScroll delay={650}>
               <div className="flex flex-wrap items-center gap-5">
-                <Link href="/projeler" className="btn-primary">
-                  Projelerimizi Gör
-                  <svg width="16" height="8" viewBox="0 0 16 8" fill="none">
-                    <path d="M1 4h14M11 1l4 3-4 3" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round"/>
-                  </svg>
+                <Link href="/projeler" className="btn-primary bg-gold hover:bg-gold-light text-cream-light">
+                  View Our Projects
+                  <svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M1 4h14M11 1l4 3-4 3" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round"/></svg>
                 </Link>
-                <Link href="/iletisim" className="btn-outline">
-                  Proje Başlat
+                <Link href="/iletisim" className="inline-flex items-center gap-3 px-8 py-4 text-xs uppercase text-cream-light border border-cream-light/40 hover:border-cream-light hover:bg-cream-light/5 transition-all duration-500" style={{letterSpacing:'0.2em'}}>
+                  Start a Project
                 </Link>
               </div>
             </AnimateOnScroll>
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <div className="absolute bottom-8 right-10 hidden md:flex flex-col items-center gap-3">
           <span className="text-[9px] tracking-widest3 uppercase text-cream/30 rotate-90 origin-center mb-6">Scroll</span>
           <div className="w-px h-16 bg-gradient-to-b from-gold/60 to-transparent" />
@@ -156,30 +136,26 @@ export default function HomePage() {
       </section>
 
       {/* ── CLIENT MARQUEE ───────────────────────────────────────── */}
-      <section className="py-10 border-y border-gold/10 overflow-hidden">
+      <section className="py-10 border-y border-espresso/10 overflow-hidden bg-linen-dark">
         <div className="flex gap-16 animate-marquee whitespace-nowrap">
-          {[...clients, ...clients].map((client, i) => (
-            <span key={i} className="text-[11px] tracking-widest2 uppercase text-cream/25 font-light flex-shrink-0 flex items-center gap-16">
+          {marqueeClients.map((client: string, i: number) => (
+            <span key={i} className="text-[11px] tracking-widest2 uppercase text-espresso/30 font-light flex-shrink-0 flex items-center gap-16">
               {client}
-              <span className="w-1 h-1 rounded-full bg-gold/30" />
+              <span className="w-1 h-1 rounded-full bg-gold/40" />
             </span>
           ))}
         </div>
       </section>
 
       {/* ── STATS ────────────────────────────────────────────────── */}
-      <section className="section-padding border-b border-gold/10">
+      <section className="section-padding border-b border-espresso/10 bg-cream">
         <div className="max-w-screen-xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
-            {stats.map((stat, i) => (
+            {stats.map((stat: { value: string; label: string }, i: number) => (
               <AnimateOnScroll key={stat.label} delay={i * 100}>
                 <div className="text-center md:text-left">
-                  <span className="font-serif text-5xl md:text-6xl font-light gold-text block mb-2">
-                    {stat.value}
-                  </span>
-                  <span className="text-[11px] tracking-widest uppercase text-cream/40 font-light">
-                    {stat.label}
-                  </span>
+                  <span className="font-serif text-5xl md:text-6xl font-light gold-text block mb-2">{stat.value}</span>
+                  <span className="text-[11px] tracking-widest uppercase text-espresso/40 font-light">{stat.label}</span>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -188,107 +164,148 @@ export default function HomePage() {
       </section>
 
       {/* ── FEATURED PRODUCTS ────────────────────────────────────── */}
-      <section className="section-padding border-b border-gold/10">
+      <section className="section-padding border-b border-espresso/10 bg-linen">
         <div className="max-w-screen-xl mx-auto">
           <AnimateOnScroll>
             <div className="flex items-end justify-between mb-16">
               <div>
                 <span className="gold-line mb-4" />
-                <h2 className="font-serif text-4xl md:text-5xl font-light text-cream-light">
-                  Öne Çıkan
-                  <br />
-                  <em className="text-gold/80 not-italic">Ürünler</em>
+                <h2 className="font-serif text-4xl md:text-5xl font-light text-espresso">
+                  Featured<br />
+                  <em className="text-gold not-italic">Products</em>
                 </h2>
               </div>
-              <Link
-                href="/urunler"
-                className="hidden md:inline-flex items-center gap-2 text-[10px] tracking-widest uppercase text-gold hover:text-gold-light transition-colors duration-300"
-              >
-                Tümünü Gör
-                <svg width="16" height="8" viewBox="0 0 16 8" fill="none">
-                  <path d="M1 4h14M11 1l4 3-4 3" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round"/>
-                </svg>
+              <Link href="/urunler" className="hidden md:inline-flex items-center gap-2 text-[10px] tracking-widest uppercase text-gold hover:text-gold-light transition-colors duration-300">
+                View All
+                <svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M1 4h14M11 1l4 3-4 3" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round"/></svg>
               </Link>
             </div>
           </AnimateOnScroll>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-gold/10">
-            {products.map((product, i) => (
-              <AnimateOnScroll key={product.id} delay={i * 100}>
-                <Link href="/urunler" className="group block bg-obsidian">
-                  <div className="img-reveal aspect-[3/4] relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-transparent z-10" />
-                    <div className="absolute inset-0 bg-obsidian/20 group-hover:bg-obsidian/0 transition-colors duration-700 z-10" />
-                    {/* Placeholder — replace with real Image when photos are ready */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-sand via-obsidian-light to-obsidian flex items-center justify-center">
-                      <span className="font-serif text-6xl text-gold/20">D</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-espresso/10">
+            {featuredProducts.length > 0 ? featuredProducts.map((product: {
+              _id: string; title: string; subtitle?: string; slug: { current: string };
+              category?: string; image?: object
+            }, i: number) => {
+              const imgUrl = sanityImageUrl(product.image, 600, 800)
+              return (
+                <AnimateOnScroll key={product._id} delay={i * 100}>
+                  <Link href={`/urunler/${product.slug.current}`} className="group block bg-linen">
+                    <div className="img-reveal aspect-[3/4] relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-t from-espresso/40 via-transparent to-transparent z-10" />
+                      <div className="absolute inset-0 bg-linen-dark/10 group-hover:bg-transparent transition-colors duration-700 z-10" />
+                      {imgUrl ? (
+                        <Image src={imgUrl} alt={product.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw" />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-linen-dark via-cream to-linen flex items-center justify-center">
+                          <span className="font-serif text-6xl text-gold/20 italic">D</span>
+                        </div>
+                      )}
+                      <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+                        <p className="text-[9px] tracking-widest uppercase text-gold mb-1">{product.category ?? product.subtitle ?? ''}</p>
+                        <p className="font-serif text-xl text-cream-light font-light">{product.title}</p>
+                      </div>
                     </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                      <p className="text-[9px] tracking-widest uppercase text-gold/60 mb-1">{product.subtitle}</p>
-                      <p className="font-serif text-xl text-cream-light font-light">{product.title}</p>
+                  </Link>
+                </AnimateOnScroll>
+              )
+            }) : (
+              // Placeholders when Sanity has no featured products yet
+              [1,2,3,4].map((n, i) => (
+                <AnimateOnScroll key={n} delay={i * 100}>
+                  <Link href="/urunler" className="group block bg-linen">
+                    <div className="img-reveal aspect-[3/4] relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-linen-dark via-cream to-linen flex items-center justify-center">
+                        <span className="font-serif text-6xl text-gold/20 italic">D</span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </AnimateOnScroll>
-            ))}
+                  </Link>
+                </AnimateOnScroll>
+              ))
+            )}
           </div>
         </div>
       </section>
 
       {/* ── FEATURED PROJECTS ────────────────────────────────────── */}
-      <section className="section-padding border-b border-gold/10">
+      <section className="section-padding border-b border-espresso/10 bg-cream">
         <div className="max-w-screen-xl mx-auto">
           <AnimateOnScroll>
             <div className="mb-16">
               <span className="gold-line mb-4" />
-              <h2 className="font-serif text-4xl md:text-5xl font-light text-cream-light">
-                Seçilmiş
-                <br />
-                <em className="text-gold/80 not-italic">Projeler</em>
+              <h2 className="font-serif text-4xl md:text-5xl font-light text-espresso">
+                Selected<br />
+                <em className="text-gold not-italic">Projects</em>
               </h2>
             </div>
           </AnimateOnScroll>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-gold/10">
-            {projects.map((project, i) => (
-              <AnimateOnScroll key={project.id} delay={i * 120}>
-                <Link href="/projeler" className="group block bg-obsidian">
-                  <div className="img-reveal aspect-[4/5] relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent z-10" />
-                    {/* Placeholder */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-sand/30 to-obsidian" />
-                    <div className="absolute top-6 right-6 z-20">
-                      <span className="text-[9px] tracking-widest uppercase text-gold/50">{project.year}</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-espresso/10">
+            {featuredProjects.length > 0 ? featuredProjects.map((project: {
+              _id: string; name: string; slug: { current: string };
+              category?: string; year?: string; coverImage?: object
+            }, i: number) => {
+              const imgUrl = sanityImageUrl(project.coverImage, 800, 1000)
+              return (
+                <AnimateOnScroll key={project._id} delay={i * 120}>
+                  <Link href={`/projeler/${project.slug.current}`} className="group block bg-cream">
+                    <div className="img-reveal aspect-[4/5] relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-t from-espresso/50 via-espresso/5 to-transparent z-10" />
+                      {imgUrl ? (
+                        <Image src={imgUrl} alt={project.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:768px) 100vw, 33vw" />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-linen-dark/50 to-cream-dark" />
+                      )}
+                      <div className="absolute top-6 right-6 z-20">
+                        <span className="text-[9px] tracking-widest uppercase text-cream/50">{project.year}</span>
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
+                        <p className="text-[9px] tracking-widest uppercase text-gold mb-2">{project.category}</p>
+                        <h3 className="font-serif text-2xl text-cream-light font-light">{project.name}</h3>
+                      </div>
                     </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
-                      <p className="text-[9px] tracking-widest uppercase text-gold/60 mb-2">{project.category}</p>
-                      <h3 className="font-serif text-2xl text-cream-light font-light">{project.name}</h3>
+                  </Link>
+                </AnimateOnScroll>
+              )
+            }) : (
+              // Placeholders when Sanity has no featured projects yet
+              [1,2,3].map((n, i) => (
+                <AnimateOnScroll key={n} delay={i * 120}>
+                  <Link href="/projeler" className="group block bg-cream">
+                    <div className="img-reveal aspect-[4/5] relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-linen-dark/50 to-cream-dark" />
                     </div>
-                  </div>
-                </Link>
-              </AnimateOnScroll>
-            ))}
+                  </Link>
+                </AnimateOnScroll>
+              ))
+            )}
           </div>
 
           <AnimateOnScroll delay={200}>
             <div className="mt-12 text-center">
-              <Link href="/projeler" className="btn-outline">
-                Tüm Projeleri Gör
-              </Link>
+              <Link href="/projeler" className="btn-outline">View All Projects</Link>
             </div>
           </AnimateOnScroll>
         </div>
       </section>
 
       {/* ── ABOUT SNIPPET ────────────────────────────────────────── */}
-      <section className="section-padding border-b border-gold/10">
+      <section className="section-padding border-b border-espresso/10 bg-linen">
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <AnimateOnScroll direction="left">
-            <div className="aspect-square relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-sand/40 via-obsidian-light to-obsidian flex items-center justify-center">
-                <span className="font-serif text-[150px] text-gold/10 leading-none select-none">D</span>
-              </div>
-              {/* Gold frame accent */}
+            <div className="aspect-square relative overflow-hidden bg-linen-dark">
+              {settings?.aboutImage ? (
+                <Image
+                  src={sanityImageUrl(settings.aboutImage, 800, 800)}
+                  alt="DiMare Design studio — handcrafted bohemian décor"
+                  fill className="object-cover"
+                  sizes="(max-width:1024px) 100vw, 50vw"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="font-serif text-[150px] text-gold/10 leading-none select-none italic">D</span>
+                </div>
+              )}
               <div className="absolute top-6 left-6 w-20 h-20 border-t border-l border-gold/30" />
               <div className="absolute bottom-6 right-6 w-20 h-20 border-b border-r border-gold/30" />
             </div>
@@ -297,50 +314,44 @@ export default function HomePage() {
           <AnimateOnScroll direction="right">
             <div>
               <span className="gold-line mb-6" />
-              <h2 className="font-serif text-4xl md:text-5xl font-light text-cream-light mb-8 leading-tight">
-                El sanatının
+              <h2 className="font-serif text-4xl md:text-5xl font-light text-espresso mb-8 leading-tight">
+                Where craft meets
                 <br />
-                <em className="text-gold not-italic">lüksle</em> buluşması.
+                <em className="text-gold not-italic">luxury.</em>
               </h2>
-              <p className="text-cream/50 text-sm leading-relaxed mb-6 font-light">
-                Dimare Design, el yapımı bohemian dekorun lüks otel deneyimiyle buluştuğu bir tasarım stüdyosudur. Rixos, TUI ve Regnum Carya gibi dünyanın önde gelen otellerinin güvendiği markayız.
+              <p className="text-espresso/50 text-sm leading-relaxed mb-6 font-light">
+                DiMare Design is a studio where handcrafted bohemian décor meets the luxury hotel experience. We are the trusted partner of leading hotels worldwide including Rixos, TUI, and Regnum Carya.
               </p>
-              <p className="text-cream/50 text-sm leading-relaxed mb-10 font-light">
-                Her proje; otelin ruhunu, misafirin hissedeceği deneyimi ve mekânın getirdiği sınırları anlayarak şekillenir. Standart ürün yoktur — her şey sizin için tasarlanır.
+              <p className="text-espresso/50 text-sm leading-relaxed mb-10 font-light">
+                Every project is shaped by understanding the hotel&apos;s identity, the experience your guests will feel, and the constraints the space brings. Nothing is standard — everything is designed for you.
               </p>
-              <Link href="/hakkimizda" className="btn-outline">
-                Hikayemiz
-              </Link>
+              <Link href="/hakkimizda" className="btn-outline">Our Story</Link>
             </div>
           </AnimateOnScroll>
         </div>
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────── */}
-      <section className="section-padding relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-sand/20 to-obsidian" />
+      <section className="section-padding relative overflow-hidden bg-espresso">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-transparent to-gold/30" />
-
         <div className="relative max-w-screen-xl mx-auto text-center">
           <AnimateOnScroll>
             <span className="inline-flex items-center gap-3 text-[10px] tracking-widest3 uppercase text-gold mb-8">
               <span className="w-6 h-px bg-gold" />
-              Projenizi Konuşalım
+              Let&apos;s Talk About Your Project
               <span className="w-6 h-px bg-gold" />
             </span>
             <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl font-light text-cream-light mb-8 leading-tight">
-              Oteliniz için
+              Let&apos;s create something
               <br />
-              <em className="gold-text not-italic">özel bir eser</em> yapalım.
+              <em className="gold-text not-italic">extraordinary.</em>
             </h2>
             <p className="text-cream/40 text-sm font-light mb-12 max-w-md mx-auto">
-              Brief gönderin, ücretsiz danışmanlık için ilk adımı atın.
+              Send us a brief and take the first step toward a free consultation.
             </p>
-            <Link href="/iletisim" className="btn-primary text-sm">
-              Proje Talebi Gönder
-              <svg width="16" height="8" viewBox="0 0 16 8" fill="none">
-                <path d="M1 4h14M11 1l4 3-4 3" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round"/>
-              </svg>
+            <Link href="/iletisim" className="inline-flex items-center gap-3 px-8 py-4 text-xs uppercase bg-gold text-cream-light hover:bg-gold-light transition-all duration-500" style={{letterSpacing:'0.2em'}}>
+              Send Project Brief
+              <svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M1 4h14M11 1l4 3-4 3" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round"/></svg>
             </Link>
           </AnimateOnScroll>
         </div>

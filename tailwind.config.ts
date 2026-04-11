@@ -10,14 +10,29 @@ const config: Config = {
     extend: {
       colors: {
         gold: {
-          light: '#E8D5A3',
-          DEFAULT: '#C9A96E',
-          dark: '#A8854A',
+          light: '#D4A96A',
+          DEFAULT: '#B8894A',
+          dark: '#8B6535',
         },
         cream: {
-          light: '#FAF6EE',
-          DEFAULT: '#F5EDD6',
-          dark: '#E8DFC8',
+          light: '#FDFAF5',
+          DEFAULT: '#F7F1E6',
+          dark: '#EDE4D3',
+        },
+        linen: {
+          light: '#FAF7F2',
+          DEFAULT: '#F2EBE0',
+          dark: '#E5D9C8',
+        },
+        clay: {
+          light: '#C4907A',
+          DEFAULT: '#A8705A',
+          dark: '#7A4F3D',
+        },
+        espresso: {
+          light: '#5C4A3A',
+          DEFAULT: '#3D2E22',
+          dark: '#1E1510',
         },
         obsidian: {
           light: '#1C1A14',
@@ -25,10 +40,11 @@ const config: Config = {
           dark: '#080706',
         },
         sand: '#2A2419',
+        warm: '#8B7355',
       },
       fontFamily: {
-        serif: ['var(--font-cormorant)', 'Georgia', 'serif'],
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-cormorant)', 'Cormorant Garamond', 'Georgia', 'serif'],
+        sans: ['var(--font-sans)', 'Josefin Sans', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
         widest2: '0.25em',

@@ -9,12 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanity/client": "^7.20.0",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^3.68.0",
+    "framer-motion": "^11.3.8",
     "next": "14.2.5",
+    "next-sanity": "^12.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "framer-motion": "^11.3.8",
     "react-intersection-observer": "^9.13.0",
-    "sharp": "^0.33.4"
+    "sanity": "^3.68.0",
+    "sharp": "^0.33.4",
+    "styled-components": "^6.4.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",
