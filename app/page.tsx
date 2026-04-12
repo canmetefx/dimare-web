@@ -13,10 +13,6 @@ export const metadata: Metadata = {
   description: siteConfig.description,
 }
 
-const fallbackClients = [
-  'Rixos Hotels', 'TUI', 'Regnum Carya', 'Vogue Supreme Bodrum',
-  'Gloria Hotels', 'Hilton', 'Marriott', 'Kempinski',
-]
 
 const fallbackStats = [
   { value: '150+', label: 'Completed Projects' },
@@ -63,12 +59,6 @@ export default async function HomePage() {
     getFeaturedProjects(),
   ])
 
-  const clients = settings?.hotelClients?.length
-    ? settings.hotelClients.map((c: { name: string }) => c.name)
-    : fallbackClients
-
-  const marqueeClients = [...clients, ...clients]
-
   const stats = settings?.stats?.length ? settings.stats : fallbackStats
 
   const heroImageUrl = settings?.heroImage
@@ -107,7 +97,7 @@ export default async function HomePage() {
               <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-light leading-[0.95] tracking-tight text-cream-light mb-8">
                 Artisan Décor
                 <br />
-                <em className="gold-text not-italic">for Luxury.</em>
+                <em className="gold-text not-italic">for Hospitality.</em>
               </h1>
             </AnimateOnScroll>
             <AnimateOnScroll delay={500}>
@@ -135,15 +125,29 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── CLIENT MARQUEE ───────────────────────────────────────── */}
-      <section className="py-10 border-y border-espresso/10 overflow-hidden bg-linen-dark">
-        <div className="flex gap-16 animate-marquee whitespace-nowrap">
-          {marqueeClients.map((client: string, i: number) => (
-            <span key={i} className="text-[11px] tracking-widest2 uppercase text-espresso/30 font-light flex-shrink-0 flex items-center gap-16">
-              {client}
-              <span className="w-1 h-1 rounded-full bg-gold/40" />
-            </span>
-          ))}
+      {/* ── REFERANS OTELLER ─────────────────────────────────────── */}
+      <section className="py-14 px-6 md:px-12 border-y border-espresso/10 bg-linen-dark">
+        <div className="max-w-screen-xl mx-auto">
+          <p className="text-[9px] tracking-widest3 uppercase text-espresso/25 text-center mb-10">
+            Güvenen Oteller
+          </p>
+          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-px bg-espresso/8">
+            {[
+              { name: 'Rixos Hotels', sub: 'Antalya' },
+              { name: 'Regnum Carya', sub: 'Belek' },
+              { name: 'Vogue Supreme', sub: 'Bodrum' },
+              { name: 'Phaselis Bay', sub: 'Kemer' },
+              { name: 'TUI Magic Life', sub: 'Antalya' },
+              { name: 'Ethno Hotels', sub: 'Belek' },
+              { name: 'Regnum Crown', sub: 'Belek' },
+              { name: 'IVY Sailing', sub: 'Ayvalık' },
+            ].map((hotel) => (
+              <div key={hotel.name} className="bg-linen-dark px-4 py-5 flex flex-col items-center justify-center text-center gap-1">
+                <span className="font-serif text-[13px] text-espresso/50 font-light leading-snug">{hotel.name}</span>
+                <span className="text-[8px] tracking-widest uppercase text-gold/40">{hotel.sub}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -317,10 +321,10 @@ export default async function HomePage() {
               <h2 className="font-serif text-4xl md:text-5xl font-light text-espresso mb-8 leading-tight">
                 Where craft meets
                 <br />
-                <em className="text-gold not-italic">luxury.</em>
+                <em className="text-gold not-italic">hospitality.</em>
               </h2>
               <p className="text-espresso/50 text-sm leading-relaxed mb-6 font-light">
-                DiMare Design is a studio where handcrafted bohemian décor meets the luxury hotel experience. We are the trusted partner of leading hotels worldwide including Rixos, TUI, and Regnum Carya.
+                DiMare Design is a contract-grade artisan studio creating bespoke bohemian décor for premier hotels and resorts. Trusted by leading hospitality brands worldwide — Rixos, TUI, Regnum Carya, and beyond.
               </p>
               <p className="text-espresso/50 text-sm leading-relaxed mb-10 font-light">
                 Every project is shaped by understanding the hotel&apos;s identity, the experience your guests will feel, and the constraints the space brings. Nothing is standard — everything is designed for you.

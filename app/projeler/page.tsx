@@ -86,7 +86,7 @@ export default async function ProjectsPage() {
               Portfolio
             </span>
             <h1 className="font-serif text-5xl md:text-7xl font-light text-espresso leading-tight mb-6">
-              Luxury Hotel
+              Hospitality
               <br />
               <em className="text-gold not-italic">Projects</em>
             </h1>

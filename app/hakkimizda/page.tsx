@@ -80,10 +80,10 @@ export default async function AboutPage() {
               <br />
               <em className="text-gold not-italic">Thread</em>
               <br />
-              &amp; Luxury.
+              &amp; Hospitality.
             </h1>
             <p className="text-espresso/50 text-base font-light leading-relaxed max-w-xl">
-              Since 2016, we have worked at the intersection of artisan craft and the luxury hotel experience. Every piece carries a story — the origin of the material, the artisan&apos;s hand, the guest&apos;s feeling.
+              Since 2016, we have worked at the intersection of artisan craft and the premier hotel experience. Every piece carries a story — the origin of the material, the artisan&apos;s hand, the guest&apos;s feeling.
             </p>
           </AnimateOnScroll>
         </div>
@@ -115,7 +115,7 @@ export default async function AboutPage() {
               <h2 className="font-serif text-4xl font-light text-espresso mb-8 leading-tight">
                 From a small workshop
                 <br />
-                <em className="text-gold not-italic">to 40+ luxury hotels</em>
+                <em className="text-gold not-italic">to 40+ premier hotels</em>
               </h2>
               <div className="space-y-5 text-espresso/50 text-sm font-light leading-relaxed">
                 <p>

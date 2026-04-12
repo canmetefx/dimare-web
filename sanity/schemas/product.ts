@@ -9,8 +9,17 @@ export const product = defineType({
     defineField({ name: 'subtitle', title: 'Alt Başlık', type: 'string' }),
     defineField({ name: 'slug', title: 'Slug (URL)', type: 'slug', options: { source: 'title' }, validation: r => r.required() }),
     defineField({
-      name: 'category', title: 'Kategori', type: 'string',
-      options: { list: ['Makrome', 'Mobilya', 'Tekstil', 'Enstalasyon'] },
+      name: 'category',
+      title: 'Kullanım Alanı',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Havuz & Plaj', value: 'havuz-plaj' },
+          { title: 'Oda & Suite', value: 'oda-suite' },
+          { title: 'Lobi & Ortak Alan', value: 'lobi-ortak' },
+          { title: 'Spa & Wellness', value: 'spa-wellness' },
+        ],
+      },
     }),
     defineField({ name: 'image', title: 'Ana Görsel', type: 'image', options: { hotspot: true } }),
     defineField({
