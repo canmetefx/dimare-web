@@ -1,11 +1,11 @@
 export const siteConfig = {
   name: 'Dimare Design',
-  tagline: 'Handcrafted Bohemian Decor for Luxury Hotels & Resorts',
+  tagline: 'Contract-Grade Artisan Décor for Premier Hotels & Resorts',
   description:
-    'Dimare Design crafts bespoke macramé, handwoven textiles and bohemian outdoor furniture for luxury hotels and resorts worldwide. Trusted by Rixos, TUI, Regnum Carya and leading Mediterranean resorts.',
+    'Dimare Design crafts bespoke macramé, handwoven textiles and bohemian furniture for premier hotels and resorts worldwide. Trusted by Rixos, TUI, Regnum Carya and leading Mediterranean hospitality brands.',
   url: 'https://www.dimare.design',
-  locale: 'en_US',
-  localeAlt: 'tr_TR',
+  locale: 'tr_TR',
+  localeAlt: 'en_US',
   ogImage: 'https://www.dimare.design/opengraph-image',
   twitter: '@dimaredesign',
   address: {
