@@ -67,13 +67,30 @@ export async function getAllProjectSlugs() {
 export async function getProjectBySlug(slug: string) {
   return client.fetch(`
     *[_type == "project" && slug.current == $slug][0] {
-      _id, name, slug, category, location, year, description, body,
-      rooms, scope, materials, tags, pinterestBoardUrl,
+      _id, name, slug, category, propertyType, location, year, description, body,
+      rooms, timelineWeeks, scope, materials, tags, pinterestBoardUrl,
+      brief, solution,
+      testimonial,
+      deliverables[]{ title, quantity, note },
       metaTitle, metaDescription,
       coverImage ${imageFields},
-      gallery[] ${imageFields}
+      gallery[] ${imageFields}{..., caption}
     }
   `, { slug })
+}
+
+export async function getRelatedProjects(currentSlug: string, category?: string) {
+  // Pull up to 3 other projects, prefer same category, fall back to any
+  return client.fetch(`
+    *[_type == "project" && slug.current != $currentSlug] | order(
+      select(category == $category => 0, 1),
+      order asc,
+      year desc
+    ) [0...3] {
+      _id, name, slug, category, location, year,
+      coverImage ${imageFields}
+    }
+  `, { currentSlug, category: category ?? '' })
 }
 
 // ── Site Settings ─────────────────────────────────────────────
