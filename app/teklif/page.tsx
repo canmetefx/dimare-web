@@ -24,20 +24,58 @@ const STATS = [
 const PROCESS = [
   {
     step: '01',
-    title: 'Bize Ulaşın',
-    body: 'Formu doldurun veya WhatsApp\'tan yazın. Aynı gün dönüş yapıyoruz.',
+    title: 'Brief & Saha Ziyareti',
+    body: 'Formu doldurun veya WhatsApp\'tan yazın. Aynı gün dönüş, gerekirse saha ziyareti ile otelinizin ışığını, ölçüsünü ve kimliğini okuruz.',
   },
   {
     step: '02',
-    title: 'Ücretsiz Konsept Görüşmesi',
-    body: 'Otelinizin ihtiyaçlarını dinliyoruz. Boyut, renk, malzeme ve bütçeye göre ilk taslağı hazırlıyoruz.',
+    title: 'Konsept & Teklif',
+    body: 'Ölçü, renk, malzeme ve bütçeye göre moodboard ve teknik taslakla birlikte fiyatlandırılmış proje özetini sunuyoruz.',
   },
   {
     step: '03',
-    title: 'Üretim & Teslimat',
-    body: 'Onayladıktan sonra üretim başlar. 4–8 hafta içinde, kurulum dahil, teslim ediyoruz.',
+    title: 'Üretim',
+    body: 'Onay sonrası atölyemizde el dokuma ve makrome üretim başlar. Süreç boyunca fotoğraflı ilerleme raporu paylaşırız. Tipik süre: 4–8 hafta.',
+  },
+  {
+    step: '04',
+    title: 'Kurulum & Teslim',
+    body: 'Ekibimiz otele gelir, güvenli askı ve montajı uygular, bakım rehberini teslim eder. Sezon başlamadan teslim garantisi.',
   },
 ]
+
+const FAQS = [
+  {
+    q: 'Teslim süresi ne kadar?',
+    a: 'Tasarım onayından sonra 4–8 hafta. Büyük kapsamlı (çok odalı resort) projelerde 10–12 haftaya kadar uzayabilir. Sezon öncesi aciliyetlerde üretim hattını önceliklendirebiliyoruz.',
+  },
+  {
+    q: 'Türkiye dışındaki otellere çalışıyor musunuz?',
+    a: 'Evet. UAE, Körfez ülkeleri, Yunanistan ve İtalya\'daki premier otel gruplarıyla deneyimimiz var. Uluslararası sevkiyat ve gümrük süreçlerini biz yönetiyoruz.',
+  },
+  {
+    q: 'Dış mekanda (havuz, sahil, teras) dayanıklı mı?',
+    a: 'Evet. UV dayanımlı ipler, paslanmaz çelik askı sistemleri ve deniz tuzuna karşı korumalı bağlantı elemanları kullanıyoruz. Dış mekan ürünlerimizde 2 yıl işçilik garantisi veriyoruz.',
+  },
+  {
+    q: 'Otelimizin marka kimliğine özel renk ve desen yapılabilir mi?',
+    a: 'Kesinlikle. Her proje sıfırdan oteliniz için tasarlanır — Pantone referanslı renk eşleşmesi, logo motifi ve imza desenler konsept aşamasında netleşir.',
+  },
+  {
+    q: 'Minimum proje büyüklüğü var mı?',
+    a: 'Butik oteller için tek nokta konsept işlerden (örn. resepsiyon duvarı, lobi avizesi) başlayıp tam otel koleksiyonuna kadar ölçekleniyoruz. Minimum proje bütçemiz hakkında ilk görüşmede şeffaf oluyoruz.',
+  },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+}
 
 export default function TeklifPage() {
   const router = useRouter()
@@ -260,7 +298,7 @@ export default function TeklifPage() {
               Nasıl Çalışıyoruz?
             </p>
           </AnimateOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-espresso/10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-espresso/10">
             {PROCESS.map((p, i) => (
               <AnimateOnScroll key={p.step} delay={i * 100}>
                 <div className="bg-linen-light px-10 py-12">
@@ -268,6 +306,39 @@ export default function TeklifPage() {
                   <h3 className="font-serif text-xl text-espresso font-light mb-4">{p.title}</h3>
                   <p className="text-espresso/40 text-sm font-light leading-relaxed">{p.body}</p>
                 </div>
+              </AnimateOnScroll>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SSS ───────────────────────────────────────────────────── */}
+      <section className="section-padding bg-linen border-b border-espresso/10">
+        <div className="max-w-screen-md mx-auto px-6">
+          <AnimateOnScroll>
+            <p className="text-[10px] tracking-widest uppercase text-gold mb-4 text-center">
+              Sık Sorulan Sorular
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl text-espresso font-light mb-14 text-center">
+              Otel yöneticilerinin en çok sorduğu beş soru.
+            </h2>
+          </AnimateOnScroll>
+          <div className="divide-y divide-espresso/10 border-y border-espresso/10">
+            {FAQS.map((f, i) => (
+              <AnimateOnScroll key={f.q} delay={i * 60}>
+                <details className="group py-6">
+                  <summary className="flex items-start justify-between gap-6 cursor-pointer list-none">
+                    <h3 className="font-serif text-lg md:text-xl text-espresso font-light leading-snug">
+                      {f.q}
+                    </h3>
+                    <span className="flex-shrink-0 text-gold text-2xl font-light leading-none mt-1 transition-transform duration-300 group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-4 text-espresso/60 text-sm font-light leading-relaxed max-w-prose">
+                    {f.a}
+                  </p>
+                </details>
               </AnimateOnScroll>
             ))}
           </div>
@@ -316,6 +387,10 @@ export default function TeklifPage() {
             url: 'https://www.dimare.design/teklif',
           }),
         }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
     </>
   )
