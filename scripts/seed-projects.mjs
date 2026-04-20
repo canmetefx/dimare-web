@@ -1,16 +1,34 @@
 /**
- * DiMare Design — Hotel Projects Seed Script
+ * Dimare Design — Hotel Projects Seed Script
  * Populates Sanity with all 15 hotel project documents.
  *
  * Run: node scripts/seed-projects.mjs
  */
 import { createClient } from '@sanity/client'
+import { readFileSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+// Load .env.local manually (no dotenv dependency)
+try {
+  const envPath = resolve(dirname(fileURLToPath(import.meta.url)), '..', '.env.local')
+  for (const line of readFileSync(envPath, 'utf8').split('\n')) {
+    const m = line.match(/^\s*([A-Z_][A-Z0-9_]*)\s*=\s*(.*?)\s*$/i)
+    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^['"]|['"]$/g, '')
+  }
+} catch { /* .env.local optional */ }
+
+const token = process.env.SANITY_WRITE_TOKEN
+if (!token) {
+  console.error('\n✗ SANITY_WRITE_TOKEN missing.\n  Put it in .env.local or export it in your shell.\n  Get a token from https://sanity.io/manage → API → Tokens (Editor/Write role).\n')
+  process.exit(1)
+}
 
 const client = createClient({
-  projectId: '0exrntll',
-  dataset: 'production',
+  projectId: process.env.SANITY_PROJECT_ID ?? '0exrntll',
+  dataset: process.env.SANITY_DATASET ?? 'production',
   apiVersion: '2024-01-01',
-  token: 'sk4XTcyozQS8OIq9lkTrlDBNV070VkHQbdravOeuob7qCMOOiOwyAQC7dBQEAkS1hlAlJgIawJSXpPvwv',
+  token,
   useCdn: false,
 })
 
@@ -28,11 +46,11 @@ const projects = [
     featured: true,
     order: 1,
     description:
-      'A landmark collaboration with NG Hotels at their flagship Phaselis Bay resort in Kemer. DiMare Design crafted bespoke macramé canopy structures for 40 pool cabanas, creating an immersive bohemian outdoor environment that became a defining element of the resort aesthetic.',
+      'A landmark collaboration with NG Hotels at their flagship Phaselis Bay resort in Kemer. Dimare Design crafted bespoke macramé canopy structures for 40 pool cabanas, creating an immersive bohemian outdoor environment that became a defining element of the resort aesthetic.',
     tags: ['Pool Deck', 'Macramé', 'Cabana', 'Outdoor', 'Kemer', '5-Star'],
-    metaTitle: 'Phaselis Bay NG Hotels — Bespoke Macramé Cabana Project | DiMare Design',
+    metaTitle: 'Phaselis Bay NG Hotels — Bespoke Macramé Cabana Project | Dimare Design',
     metaDescription:
-      'DiMare Design crafted custom macramé canopy installations for 40 premium pool cabanas at Phaselis Bay by NG Hotels, Kemer. Bespoke handcrafted décor for a 5-star resort outdoor transformation.',
+      'Dimare Design crafted custom macramé canopy installations for 40 premium pool cabanas at Phaselis Bay by NG Hotels, Kemer. Bespoke handcrafted décor for a 5-star resort outdoor transformation.',
   },
   {
     _type: 'project',
@@ -47,11 +65,11 @@ const projects = [
     featured: true,
     order: 2,
     description:
-      'One of DiMare Design\'s most prestigious collaborations — a multi-property project for Rixos Hotels spanning lobby installations and in-room textile collections. Each piece was custom-designed to complement the Rixos brand identity while adding artisan warmth to ultra-luxury spaces.',
+      'One of Dimare Design\'s most prestigious collaborations — a multi-property project for Rixos Hotels spanning lobby installations and in-room textile collections. Each piece was custom-designed to complement the Rixos brand identity while adding artisan warmth to ultra-luxury spaces.',
     tags: ['Lobby', 'Suite', 'Wall Art', 'Textile', '5-Star', 'Ultra All-Inclusive'],
-    metaTitle: 'Rixos Hotels — Custom Macramé & Textile Collaboration | DiMare Design',
+    metaTitle: 'Rixos Hotels — Custom Macramé & Textile Collaboration | Dimare Design',
     metaDescription:
-      'DiMare Design created bespoke macramé lobby installations and handwoven suite textile collections for Rixos Hotels, Turkey. Premium artisan décor for one of Turkey\'s leading 5-star hotel groups.',
+      'Dimare Design created bespoke macramé lobby installations and handwoven suite textile collections for Rixos Hotels, Turkey. Premium artisan décor for one of Turkey\'s leading 5-star hotel groups.',
   },
   {
     _type: 'project',
@@ -66,11 +84,11 @@ const projects = [
     featured: true,
     order: 3,
     description:
-      'Regnum Carya is one of Turkey\'s most awarded golf and spa resorts. DiMare Design was commissioned to create a cohesive artisan décor narrative across the spa and golf clubhouse — a collection of woven dividers, hanging textile art, and bespoke seating cushions that bring natural warmth to the resort\'s premium amenities.',
+      'Regnum Carya is one of Turkey\'s most awarded golf and spa resorts. Dimare Design was commissioned to create a cohesive artisan décor narrative across the spa and golf clubhouse — a collection of woven dividers, hanging textile art, and bespoke seating cushions that bring natural warmth to the resort\'s premium amenities.',
     tags: ['Spa', 'Golf', 'Belek', 'Textile Art', 'Relaxation Zone', '5-Star'],
-    metaTitle: 'Regnum Carya — Spa & Golf Club Artisan Décor | DiMare Design',
+    metaTitle: 'Regnum Carya — Spa & Golf Club Artisan Décor | Dimare Design',
     metaDescription:
-      'DiMare Design crafted bespoke macramé and woven textile décor for Regnum Carya Golf & Spa Resort in Belek. Custom room dividers, spa hangings, and artisan cushion collections for a world-class resort.',
+      'Dimare Design crafted bespoke macramé and woven textile décor for Regnum Carya Golf & Spa Resort in Belek. Custom room dividers, spa hangings, and artisan cushion collections for a world-class resort.',
   },
   {
     _type: 'project',
@@ -85,11 +103,11 @@ const projects = [
     featured: false,
     order: 4,
     description:
-      'Vogue Hotel Supreme Bodrum\'s distinctive personality demanded an equally distinct design approach. DiMare Design created hand-knotted macramé headboards as the centrepiece of each suite, alongside a sweeping pool bar canopy installation that became one of the hotel\'s most photographed features.',
+      'Vogue Hotel Supreme Bodrum\'s distinctive personality demanded an equally distinct design approach. Dimare Design created hand-knotted macramé headboards as the centrepiece of each suite, alongside a sweeping pool bar canopy installation that became one of the hotel\'s most photographed features.',
     tags: ['Boutique', 'Suite', 'Headboard', 'Bodrum', 'Pool Bar', 'Macramé'],
-    metaTitle: 'Vogue Hotel Supreme Bodrum — Macramé Suite & Pool Bar Décor | DiMare Design',
+    metaTitle: 'Vogue Hotel Supreme Bodrum — Macramé Suite & Pool Bar Décor | Dimare Design',
     metaDescription:
-      'Bespoke macramé headboards and a signature pool bar canopy installation designed by DiMare Design for Vogue Hotel Supreme Bodrum. Handcrafted artisan décor for a boutique luxury hotel.',
+      'Bespoke macramé headboards and a signature pool bar canopy installation designed by Dimare Design for Vogue Hotel Supreme Bodrum. Handcrafted artisan décor for a boutique luxury hotel.',
   },
   {
     _type: 'project',
@@ -104,11 +122,11 @@ const projects = [
     featured: false,
     order: 5,
     description:
-      'TUI Magic Life\'s expansive resort called for large-scale artisan installations that could hold their own across wide outdoor spaces. DiMare Design responded with custom macramé shade sails, hammock gardens, and a cohesive terrace textile collection — transforming functional areas into experiential destinations for resort guests.',
+      'TUI Magic Life\'s expansive resort called for large-scale artisan installations that could hold their own across wide outdoor spaces. Dimare Design responded with custom macramé shade sails, hammock gardens, and a cohesive terrace textile collection — transforming functional areas into experiential destinations for resort guests.',
     tags: ['Resort', 'Outdoor', 'Pool Area', 'Hammock', 'Shade Structure', 'TUI'],
-    metaTitle: 'TUI Magic Life — Resort Outdoor Macramé & Textile Collection | DiMare Design',
+    metaTitle: 'TUI Magic Life — Resort Outdoor Macramé & Textile Collection | Dimare Design',
     metaDescription:
-      'DiMare Design created large-scale macramé shade structures, hammock gardens, and outdoor textile décor for TUI Magic Life Turkey. Artisan resort décor built for scale and durability.',
+      'Dimare Design created large-scale macramé shade structures, hammock gardens, and outdoor textile décor for TUI Magic Life Turkey. Artisan resort décor built for scale and durability.',
   },
   {
     _type: 'project',
@@ -123,11 +141,11 @@ const projects = [
     featured: false,
     order: 6,
     description:
-      'The Crown is Regnum\'s most exclusive property — a resort within a resort for VIP guests. DiMare Design was entrusted to create the highest level of bespoke artisan furnishing: each piece hand-selected for material provenance, crafted to precise spatial specifications, and finished to a standard befitting the most discerning hospitality guests.',
+      'The Crown is Regnum\'s most exclusive property — a resort within a resort for VIP guests. Dimare Design was entrusted to create the highest level of bespoke artisan furnishing: each piece hand-selected for material provenance, crafted to precise spatial specifications, and finished to a standard befitting the most discerning hospitality guests.',
     tags: ['VIP', 'Presidential Suite', 'Belek', 'Exclusive', 'Bespoke', 'Premium'],
-    metaTitle: 'Regnum The Crown — VIP Bespoke Artisan Décor | DiMare Design',
+    metaTitle: 'Regnum The Crown — VIP Bespoke Artisan Décor | Dimare Design',
     metaDescription:
-      'DiMare Design created exclusive handcrafted textile décor for Regnum The Crown presidential suites and VIP lounge in Belek. The highest standard of bespoke artisan furnishing for ultra-premium hospitality.',
+      'Dimare Design created exclusive handcrafted textile décor for Regnum The Crown presidential suites and VIP lounge in Belek. The highest standard of bespoke artisan furnishing for ultra-premium hospitality.',
   },
   {
     _type: 'project',
@@ -142,11 +160,11 @@ const projects = [
     featured: false,
     order: 7,
     description:
-      'Lucky Monkey Hotel is a concept-driven boutique property with a bold personality. DiMare Design delivered a complete bohemian interior package — from statement swing installations in the bar to an immersive wall art gallery running through the corridors. The result is a space that guests photograph, share, and remember.',
+      'Lucky Monkey Hotel is a concept-driven boutique property with a bold personality. Dimare Design delivered a complete bohemian interior package — from statement swing installations in the bar to an immersive wall art gallery running through the corridors. The result is a space that guests photograph, share, and remember.',
     tags: ['Boutique', 'Concept Hotel', 'Swing', 'Wall Art', 'Full Interior', 'Alanya'],
-    metaTitle: 'Lucky Monkey Hotel — Full Bohemian Interior by DiMare Design',
+    metaTitle: 'Lucky Monkey Hotel — Full Bohemian Interior by Dimare Design',
     metaDescription:
-      'DiMare Design delivered a complete bohemian interior for Lucky Monkey Hotel — macramé swings, wall art galleries, and woven textile installations that define the hotel\'s bold concept identity.',
+      'Dimare Design delivered a complete bohemian interior for Lucky Monkey Hotel — macramé swings, wall art galleries, and woven textile installations that define the hotel\'s bold concept identity.',
   },
   {
     _type: 'project',
@@ -161,11 +179,11 @@ const projects = [
     featured: false,
     order: 8,
     description:
-      'So Beach needed artisan installations that could withstand the demanding coastal environment while delivering a premium aesthetic. DiMare Design engineered salt-resistant macramé curtain systems for beach cabanas and a hammock garden — combining craft and durability for a high-footfall beach club.',
+      'So Beach needed artisan installations that could withstand the demanding coastal environment while delivering a premium aesthetic. Dimare Design engineered salt-resistant macramé curtain systems for beach cabanas and a hammock garden — combining craft and durability for a high-footfall beach club.',
     tags: ['Beach Club', 'Hammock', 'Cabana', 'Coastal', 'Outdoor', 'Lounge'],
-    metaTitle: 'So Beach Club — Coastal Macramé & Hammock Installation | DiMare Design',
+    metaTitle: 'So Beach Club — Coastal Macramé & Hammock Installation | Dimare Design',
     metaDescription:
-      'DiMare Design created salt-resistant macramé cabana curtains, a hammock garden, and woven lounge textiles for So Beach club. Artisan décor engineered for coastal hospitality environments.',
+      'Dimare Design created salt-resistant macramé cabana curtains, a hammock garden, and woven lounge textiles for So Beach club. Artisan décor engineered for coastal hospitality environments.',
   },
   {
     _type: 'project',
@@ -180,11 +198,11 @@ const projects = [
     featured: false,
     order: 9,
     description:
-      'Ethno Hotels Belek\'s concept is rooted in Anatolian cultural heritage — and DiMare Design\'s artisan approach was a natural fit. The project covered every public touchpoint: lobby kilim-inspired wall art, restaurant macramé dividers, spa textile hangings, and exterior terrace cushion collections, all designed to honour and extend the hotel\'s ethnic narrative.',
+      'Ethno Hotels Belek\'s concept is rooted in Anatolian cultural heritage — and Dimare Design\'s artisan approach was a natural fit. The project covered every public touchpoint: lobby kilim-inspired wall art, restaurant macramé dividers, spa textile hangings, and exterior terrace cushion collections, all designed to honour and extend the hotel\'s ethnic narrative.',
     tags: ['Ethnic Concept', 'Anatolian', 'Belek', 'Lobby', 'Restaurant', 'Spa', 'Kilim'],
-    metaTitle: 'Ethno Hotels Belek — Anatolian-Inspired Textile Décor | DiMare Design',
+    metaTitle: 'Ethno Hotels Belek — Anatolian-Inspired Textile Décor | Dimare Design',
     metaDescription:
-      'DiMare Design created handwoven Anatolian-inspired textiles for Ethno Hotels Belek — kilim-style wall art, macramé dividers, and ethnic textile collections across all public areas.',
+      'Dimare Design created handwoven Anatolian-inspired textiles for Ethno Hotels Belek — kilim-style wall art, macramé dividers, and ethnic textile collections across all public areas.',
   },
   {
     _type: 'project',
@@ -199,11 +217,11 @@ const projects = [
     featured: false,
     order: 10,
     description:
-      'DiMare Design brought the same artisan craftsmanship that defines its hotel work to Caldeza\'s café interior. The centrepiece is a large-format macramé wall installation that creates an immersive, Instagrammable backdrop — complemented by a suspended pendant garden and handwoven cushion accessories throughout the seating areas.',
+      'Dimare Design brought the same artisan craftsmanship that defines its hotel work to Caldeza\'s café interior. The centrepiece is a large-format macramé wall installation that creates an immersive, Instagrammable backdrop — complemented by a suspended pendant garden and handwoven cushion accessories throughout the seating areas.',
     tags: ['Café', 'Restaurant', 'Wall Art', 'Pendant', 'Interior', 'Bohemian'],
-    metaTitle: 'Caldeza Coffee & More — Bohemian Café Interior by DiMare Design',
+    metaTitle: 'Caldeza Coffee & More — Bohemian Café Interior by Dimare Design',
     metaDescription:
-      'DiMare Design crafted a bohemian café interior for Caldeza — a large macramé wall installation, hanging pendant garden, and handwoven textile accessories creating an immersive artisan atmosphere.',
+      'Dimare Design crafted a bohemian café interior for Caldeza — a large macramé wall installation, hanging pendant garden, and handwoven textile accessories creating an immersive artisan atmosphere.',
   },
   {
     _type: 'project',
@@ -218,11 +236,11 @@ const projects = [
     featured: false,
     order: 11,
     description:
-      'MC Arancia Resort Hotel commissioned DiMare Design for a comprehensive outdoor transformation. The project covered every outdoor zone: macramé shade sails over the pool gardens, a dedicated hammock park, woven dividers defining relaxation areas, and a cohesive cushion collection that ties the entire outdoor aesthetic together.',
+      'MC Arancia Resort Hotel commissioned Dimare Design for a comprehensive outdoor transformation. The project covered every outdoor zone: macramé shade sails over the pool gardens, a dedicated hammock park, woven dividers defining relaxation areas, and a cohesive cushion collection that ties the entire outdoor aesthetic together.',
     tags: ['Resort', 'Pool Garden', 'Hammock', 'Side', 'Outdoor', 'Full Package'],
-    metaTitle: 'MC Arancia Resort — Complete Outdoor Artisan Décor | DiMare Design',
+    metaTitle: 'MC Arancia Resort — Complete Outdoor Artisan Décor | Dimare Design',
     metaDescription:
-      'DiMare Design delivered a complete outdoor décor package for MC Arancia Resort Hotel in Side — macramé shade sails, hammock park, woven dividers, and full cushion collections.',
+      'Dimare Design delivered a complete outdoor décor package for MC Arancia Resort Hotel in Side — macramé shade sails, hammock park, woven dividers, and full cushion collections.',
   },
   {
     _type: 'project',
@@ -237,11 +255,11 @@ const projects = [
     featured: false,
     order: 12,
     description:
-      'IVY Sailing Resort\'s setting on the Aegean coast called for a design language drawn from the sea. DiMare Design interpreted this through marine-grade macramé rope work, natural driftwood accents, and linen textiles — creating a boutique resort atmosphere that feels as organic as its coastal surroundings.',
+      'IVY Sailing Resort\'s setting on the Aegean coast called for a design language drawn from the sea. Dimare Design interpreted this through marine-grade macramé rope work, natural driftwood accents, and linen textiles — creating a boutique resort atmosphere that feels as organic as its coastal surroundings.',
     tags: ['Marina', 'Sailing', 'Boutique', 'Ayvalık', 'Aegean', 'Coastal', 'Nautical'],
-    metaTitle: 'IVY Sailing Resort Ayvalık — Nautical Artisan Décor | DiMare Design',
+    metaTitle: 'IVY Sailing Resort Ayvalık — Nautical Artisan Décor | Dimare Design',
     metaDescription:
-      'DiMare Design created nautical-inspired macramé and natural textile décor for IVY Sailing Resort in Ayvalık. Marine-grade rope work and driftwood installations for an Aegean boutique resort.',
+      'Dimare Design created nautical-inspired macramé and natural textile décor for IVY Sailing Resort in Ayvalık. Marine-grade rope work and driftwood installations for an Aegean boutique resort.',
   },
   {
     _type: 'project',
@@ -256,11 +274,11 @@ const projects = [
     featured: false,
     order: 13,
     description:
-      'Kalypso Beach\'s identity is centred on relaxed, natural beach living — and DiMare Design amplified this with bespoke canopy structures that define the beach lounging experience. The handwoven accessories and bohemian lounge décor create a coherent visual story from arrival to the waterline.',
+      'Kalypso Beach\'s identity is centred on relaxed, natural beach living — and Dimare Design amplified this with bespoke canopy structures that define the beach lounging experience. The handwoven accessories and bohemian lounge décor create a coherent visual story from arrival to the waterline.',
     tags: ['Beach Hotel', 'Canopy', 'Lounge', 'Outdoor', 'Bohemian', 'Antalya'],
-    metaTitle: 'Kalypso Beach Hotel — Bohemian Beach Décor by DiMare Design',
+    metaTitle: 'Kalypso Beach Hotel — Bohemian Beach Décor by Dimare Design',
     metaDescription:
-      'DiMare Design crafted custom macramé canopy structures and bohemian lounge décor for Kalypso Beach Hotel. Handwoven artisan installations that define the resort\'s natural beach identity.',
+      'Dimare Design crafted custom macramé canopy structures and bohemian lounge décor for Kalypso Beach Hotel. Handwoven artisan installations that define the resort\'s natural beach identity.',
   },
   {
     _type: 'project',
@@ -275,11 +293,11 @@ const projects = [
     featured: false,
     order: 14,
     description:
-      'AVLU (meaning "courtyard" in Turkish) is a boutique property built around its central outdoor space. DiMare Design created an overhead macramé installation that transforms the courtyard into a captivating evening gathering space — combined with hanging lanterns, woven dividers, and textile accessories that complete the boutique narrative.',
+      'AVLU (meaning "courtyard" in Turkish) is a boutique property built around its central outdoor space. Dimare Design created an overhead macramé installation that transforms the courtyard into a captivating evening gathering space — combined with hanging lanterns, woven dividers, and textile accessories that complete the boutique narrative.',
     tags: ['Boutique', 'Courtyard', 'Installation', 'Lantern', 'Antalya', 'Intimate'],
-    metaTitle: 'AVLU Boutique — Courtyard Macramé Installation by DiMare Design',
+    metaTitle: 'AVLU Boutique — Courtyard Macramé Installation by Dimare Design',
     metaDescription:
-      'DiMare Design transformed AVLU boutique hotel\'s central courtyard with a custom overhead macramé installation, lantern hangings, and woven textile accessories.',
+      'Dimare Design transformed AVLU boutique hotel\'s central courtyard with a custom overhead macramé installation, lantern hangings, and woven textile accessories.',
   },
   {
     _type: 'project',
@@ -294,11 +312,122 @@ const projects = [
     featured: false,
     order: 15,
     description:
-      'Çakıl Beach Resort engaged DiMare Design to deliver a complete artisan décor transformation across all outdoor areas. The project spans from the first-row beach cabanas to the pool terraces — a cohesive bohemian collection that elevates every outdoor space guests encounter throughout their stay.',
+      'Çakıl Beach Resort engaged Dimare Design to deliver a complete artisan décor transformation across all outdoor areas. The project spans from the first-row beach cabanas to the pool terraces — a cohesive bohemian collection that elevates every outdoor space guests encounter throughout their stay.',
     tags: ['Beach Resort', 'Full Package', 'Cabana', 'Hammock', 'Pool Terrace', 'Antalya'],
-    metaTitle: 'Çakıl Beach Resort — Full Bohemian Outdoor Décor | DiMare Design',
+    metaTitle: 'Çakıl Beach Resort — Full Bohemian Outdoor Décor | Dimare Design',
     metaDescription:
-      'DiMare Design delivered a complete bohemian outdoor décor package for Çakıl Beach Resort — macramé cabana installations, hammock terraces, and woven shade structures across all outdoor zones.',
+      'Dimare Design delivered a complete bohemian outdoor décor package for Çakıl Beach Resort — macramé cabana installations, hammock terraces, and woven shade structures across all outdoor zones.',
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  //  SKELETONS — real archive projects pending enrichment
+  //  These appear in Sanity Studio as drafts. Fill in brief / solution /
+  //  deliverables / gallery from Studio before publishing.
+  //  They are ordered 100+ so they sort last until enriched.
+  // ─────────────────────────────────────────────────────────────
+  {
+    _type: 'project',
+    name: 'ADALYA Bliss',
+    slug: { _type: 'slug', current: 'adalya-bliss' },
+    category: 'Resort Outdoor & Pool Areas',
+    propertyType: 'Resort',
+    location: 'Side, Antalya',
+    year: '2024',
+    featured: false,
+    order: 100,
+    description: '',
+    tags: ['Resort', 'Antalya', 'Side'],
+  },
+  {
+    _type: 'project',
+    name: 'AVLU Beach Mersin',
+    slug: { _type: 'slug', current: 'avlu-beach-mersin' },
+    category: 'Beach Club & Outdoor',
+    propertyType: 'Beach Club',
+    location: 'Mersin, Turkey',
+    year: '2024',
+    featured: false,
+    order: 101,
+    description: '',
+    tags: ['Beach Club', 'Mersin', 'Outdoor'],
+  },
+  {
+    _type: 'project',
+    name: 'Dream World Hotel',
+    slug: { _type: 'slug', current: 'dream-world-hotel' },
+    category: 'Full Property',
+    propertyType: 'Resort',
+    location: 'Belek, Antalya',
+    year: '2024',
+    featured: false,
+    order: 102,
+    description: '',
+    tags: ['Resort', 'Belek', 'Full Property'],
+  },
+  {
+    _type: 'project',
+    name: 'MOKAMP Cunda',
+    slug: { _type: 'slug', current: 'mokamp-cunda' },
+    category: 'Beach Club & Outdoor',
+    propertyType: 'Boutique Hotel',
+    location: 'Cunda Island, Ayvalık',
+    year: '2024',
+    featured: false,
+    order: 103,
+    description: '',
+    tags: ['Cunda', 'Ayvalık', 'Boutique', 'Glamping'],
+  },
+  {
+    _type: 'project',
+    name: 'NG Phaselis Bay 2026',
+    slug: { _type: 'slug', current: 'ng-phaselis-bay-2026' },
+    category: 'Pool Deck & Cabanas',
+    propertyType: 'Resort',
+    location: 'Kemer, Antalya',
+    year: '2026',
+    featured: false,
+    order: 104,
+    description: '',
+    tags: ['NG Hotels', 'Phaselis', 'Kemer', '2026 Season', 'Pool Deck'],
+  },
+  {
+    _type: 'project',
+    name: 'TUI Magic Life Bodrum',
+    slug: { _type: 'slug', current: 'tui-magic-life-bodrum' },
+    category: 'Resort Outdoor & Pool Areas',
+    propertyType: 'Resort',
+    location: 'Bodrum, Muğla',
+    year: '2026',
+    featured: true,
+    order: 105,
+    description: '',
+    tags: ['TUI', 'Bodrum', 'Resort', 'Pool', 'Beach'],
+  },
+  {
+    _type: 'project',
+    name: 'Zaira Hotel',
+    slug: { _type: 'slug', current: 'zaira-hotel' },
+    category: 'Suite & Room Décor',
+    propertyType: 'Boutique Hotel',
+    location: 'Turkey',
+    year: '2024',
+    featured: false,
+    order: 106,
+    description: '',
+    tags: ['Boutique', 'Suite'],
+  },
+  {
+    _type: 'project',
+    name: 'IABA 2025 — Bienal Installation',
+    slug: { _type: 'slug', current: 'iaba-2025-bienal' },
+    category: 'Full Property',
+    propertyType: 'Bienal / Event',
+    location: 'Turkey',
+    year: '2025',
+    featured: false,
+    order: 107,
+    description: '',
+    tags: ['Bienal', 'Art Installation', 'Cultural'],
   },
 ]
 

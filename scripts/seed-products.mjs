@@ -1,17 +1,35 @@
 /**
- * DiMare Design — Product Seed Script
+ * Dimare Design — Product Seed Script
  * Creates 20 products across 4 mekan-based categories.
  * Etsy/Shopify URLs are placeholders — update in Sanity Studio after seeding.
  *
  * Run: node scripts/seed-products.mjs
  */
 import { createClient } from '@sanity/client'
+import { readFileSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+// Load .env.local manually (no dotenv dependency)
+try {
+  const envPath = resolve(dirname(fileURLToPath(import.meta.url)), '..', '.env.local')
+  for (const line of readFileSync(envPath, 'utf8').split('\n')) {
+    const m = line.match(/^\s*([A-Z_][A-Z0-9_]*)\s*=\s*(.*?)\s*$/i)
+    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^['"]|['"]$/g, '')
+  }
+} catch { /* .env.local optional */ }
+
+const token = process.env.SANITY_WRITE_TOKEN
+if (!token) {
+  console.error('\n✗ SANITY_WRITE_TOKEN missing.\n  Put it in .env.local or export it in your shell.\n  Get a token from https://sanity.io/manage → API → Tokens (Editor/Write role).\n')
+  process.exit(1)
+}
 
 const client = createClient({
-  projectId: '0exrntll',
-  dataset: 'production',
+  projectId: process.env.SANITY_PROJECT_ID ?? '0exrntll',
+  dataset: process.env.SANITY_DATASET ?? 'production',
   apiVersion: '2024-01-01',
-  token: 'sk4XTcyozQS8OIq9lkTrlDBNV070VkHQbdravOeuob7qCMOOiOwyAQC7dBQEAkS1hlAlJgIawJSXpPvwv',
+  token,
   useCdn: false,
 })
 
@@ -34,7 +52,7 @@ const products = [
     featured: true,
     order: 1,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Pool Cabana Macramé Canopy — Hotel Shade Structure | DiMare Design',
+    metaTitle: 'Pool Cabana Macramé Canopy — Hotel Shade Structure | Dimare Design',
     metaDescription: 'Custom macramé canopy structures for hotel pool and beach cabanas. UV-resistant, salt-resistant cotton cord. Fully bespoke sizing for resort outdoor areas.',
   },
   {
@@ -50,7 +68,7 @@ const products = [
     featured: true,
     order: 2,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Resort Double Hammock — Handcrafted Hotel Pool Hammock | DiMare Design',
+    metaTitle: 'Resort Double Hammock — Handcrafted Hotel Pool Hammock | Dimare Design',
     metaDescription: 'Premium double hammock for hotel pool and garden areas. Hand-knotted cotton, teak spreader bars, 200kg capacity. Customisable colours for resort outdoor décor.',
   },
   {
@@ -66,7 +84,7 @@ const products = [
     featured: true,
     order: 3,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Boho Swing Chair for Hotels — Macramé Hanging Chair | DiMare Design',
+    metaTitle: 'Boho Swing Chair for Hotels — Macramé Hanging Chair | Dimare Design',
     metaDescription: 'Hand-woven macramé swing chair for hotel pool decks and lounge areas. Solid wood hoop, custom colours. Freestanding and ceiling-mount options for hospitality use.',
   },
   {
@@ -82,7 +100,7 @@ const products = [
     featured: false,
     order: 4,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Hotel VIP Loca Shade Sail — Macramé Shade Structure | DiMare Design',
+    metaTitle: 'Hotel VIP Loca Shade Sail — Macramé Shade Structure | Dimare Design',
     metaDescription: 'Custom woven shade sail for hotel VIP loca zones. UV-resistant macramé cord, stainless steel tensioning. Bespoke sizing for resort pool areas.',
   },
   {
@@ -98,7 +116,7 @@ const products = [
     featured: false,
     order: 5,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Hotel Pool Cushion Set — Handwoven Outdoor Cushions | DiMare Design',
+    metaTitle: 'Hotel Pool Cushion Set — Handwoven Outdoor Cushions | Dimare Design',
     metaDescription: 'Handwoven outdoor cushion sets for hotel pool and beach areas. Water-resistant, washable covers. Bulk orders for 10–200+ pieces. Custom colours for resort branding.',
   },
 
@@ -117,7 +135,7 @@ const products = [
     featured: true,
     order: 6,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Hotel Suite Macramé Headboard — Bespoke Woven Headboard | DiMare Design',
+    metaTitle: 'Hotel Suite Macramé Headboard — Bespoke Woven Headboard | Dimare Design',
     metaDescription: 'Hand-knotted macramé headboards for hotel suites. Natural cotton cord, solid wood mount. Fully bespoke sizing and pattern to match your suite design.',
   },
   {
@@ -133,7 +151,7 @@ const products = [
     featured: false,
     order: 7,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Hotel Macramé Curtain Panel — Room Divider & Window Drape | DiMare Design',
+    metaTitle: 'Hotel Macramé Curtain Panel — Room Divider & Window Drape | Dimare Design',
     metaDescription: 'Natural cotton macramé curtain panels for hotel rooms and suites. Made to measure, semi-transparent pattern. Custom sizing for any room or divider application.',
   },
   {
@@ -149,7 +167,7 @@ const products = [
     featured: false,
     order: 8,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Hotel Artisan Woven Rug — Anatolian-Inspired Area Rug | DiMare Design',
+    metaTitle: 'Hotel Artisan Woven Rug — Anatolian-Inspired Area Rug | Dimare Design',
     metaDescription: 'Flat-woven artisan rugs in cotton-jute blend for hotel rooms and suites. Anti-slip backing, Anatolian geometric patterns. Custom dimensions for any hospitality space.',
   },
   {
@@ -165,7 +183,7 @@ const products = [
     featured: true,
     order: 9,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Macramé Pendant Light for Hotels — Woven Light Shade | DiMare Design',
+    metaTitle: 'Macramé Pendant Light for Hotels — Woven Light Shade | Dimare Design',
     metaDescription: 'Hand-knotted macramé pendant light shades for hotel rooms, suites and restaurants. E27 fitting, available in single or cluster arrangements. Natural cotton cord.',
   },
   {
@@ -181,7 +199,7 @@ const products = [
     featured: false,
     order: 10,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Hotel Suite Cushion Collection — Woven & Macramé Cushions | DiMare Design',
+    metaTitle: 'Hotel Suite Cushion Collection — Woven & Macramé Cushions | Dimare Design',
     metaDescription: 'Hand-woven cushion sets for hotel suite beds and seating. Removable covers, sets of 3–5+, standard or bespoke sizing. Coordinated macramé and textile designs.',
   },
 
@@ -200,7 +218,7 @@ const products = [
     featured: true,
     order: 11,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Hotel Lobby Macramé Wall Installation — Large-Scale Art | DiMare Design',
+    metaTitle: 'Hotel Lobby Macramé Wall Installation — Large-Scale Art | Dimare Design',
     metaDescription: 'Bespoke floor-to-ceiling macramé wall installations for hotel lobbies. Designed to your exact dimensions and brand identity. Includes professional on-site installation.',
   },
   {
@@ -216,7 +234,7 @@ const products = [
     featured: false,
     order: 12,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Hotel Woven Room Divider — Macramé Partition Screen | DiMare Design',
+    metaTitle: 'Hotel Woven Room Divider — Macramé Partition Screen | Dimare Design',
     metaDescription: 'Freestanding macramé room divider for hotel lobbies and restaurants. Solid wood frame, custom widths. Defines zones while maintaining airy open aesthetics.',
   },
   {
@@ -232,7 +250,7 @@ const products = [
     featured: false,
     order: 13,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Hotel Artisan Basket Set — Woven Seagrass & Jute Baskets | DiMare Design',
+    metaTitle: 'Hotel Artisan Basket Set — Woven Seagrass & Jute Baskets | Dimare Design',
     metaDescription: 'Hand-woven seagrass and jute basket sets for hotel lobbies, spas, and rooms. Available in 3 coordinated sizes for towel display and decorative storage.',
   },
   {
@@ -248,7 +266,7 @@ const products = [
     featured: false,
     order: 14,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Macramé Coffee Table for Hotels — Woven Side Table | DiMare Design',
+    metaTitle: 'Macramé Coffee Table for Hotels — Woven Side Table | Dimare Design',
     metaDescription: 'Handcrafted coffee table with macramé shelf and solid teak top for hotel lounges and suites. Artisan weaving meets functional furniture. Custom dimensions.',
   },
   {
@@ -264,7 +282,7 @@ const products = [
     featured: false,
     order: 15,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Hotel Decorative Wall Plate Set — Woven Rattan Wall Décor | DiMare Design',
+    metaTitle: 'Hotel Decorative Wall Plate Set — Woven Rattan Wall Décor | Dimare Design',
     metaDescription: 'Woven decorative wall plate sets in rattan and cotton for hotel corridors and rooms. Set of 3 in varied sizes, geometric patterns. Lightweight wall-mount design.',
   },
 
@@ -283,7 +301,7 @@ const products = [
     featured: false,
     order: 16,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Spa Treatment Curtain — Natural Macramé Privacy Divider | DiMare Design',
+    metaTitle: 'Spa Treatment Curtain — Natural Macramé Privacy Divider | Dimare Design',
     metaDescription: 'Natural cotton macramé curtains for hotel spa treatment rooms. Anti-mould treatment, open-weave pattern. Custom sizing for any spa environment.',
   },
   {
@@ -299,7 +317,7 @@ const products = [
     featured: true,
     order: 17,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Spa Meditation Canopy — Macramé Relaxation Corner | DiMare Design',
+    metaTitle: 'Spa Meditation Canopy — Macramé Relaxation Corner | Dimare Design',
     metaDescription: 'Overhead macramé canopy for hotel spa and wellness relaxation corners. Defines calm zones without solid walls. Custom diameter 150–300cm, natural cotton.',
   },
   {
@@ -315,7 +333,7 @@ const products = [
     featured: false,
     order: 18,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Spa Partition Screen Set — Woven Macramé Divider Panels | DiMare Design',
+    metaTitle: 'Spa Partition Screen Set — Woven Macramé Divider Panels | Dimare Design',
     metaDescription: 'Set of 3 macramé partition panels for hotel spa areas. 90×200cm each, modular joining, bamboo rail. Defines zones in relaxation lounges and changing rooms.',
   },
   {
@@ -331,7 +349,7 @@ const products = [
     featured: false,
     order: 19,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Spa Floor Cushion & Puf Set — Woven Cotton Lounge Seating | DiMare Design',
+    metaTitle: 'Spa Floor Cushion & Puf Set — Woven Cotton Lounge Seating | Dimare Design',
     metaDescription: 'Handwoven floor cushion and puf sets for hotel spa lounges and yoga areas. Washable removable covers, firm padding, natural cotton-linen blend.',
   },
   {
@@ -347,7 +365,7 @@ const products = [
     featured: false,
     order: 20,
     etsyUrl: `${ETSY_BASE}`,
-    metaTitle: 'Hotel Spa Towel Holder — Macramé Driftwood Towel Display | DiMare Design',
+    metaTitle: 'Hotel Spa Towel Holder — Macramé Driftwood Towel Display | Dimare Design',
     metaDescription: 'Wall-mounted macramé towel display for hotel spa, pool, and bathrooms. Driftwood rail, holds 4–6 towels. Single or double row configurations.',
   },
 ]
