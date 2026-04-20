@@ -129,7 +129,7 @@ export default async function HomePage() {
       <section className="py-14 px-6 md:px-12 border-y border-espresso/10 bg-linen-dark">
         <div className="max-w-screen-xl mx-auto">
           <p className="text-[9px] tracking-widest3 uppercase text-espresso/25 text-center mb-10">
-            Güvenen Oteller
+            Trusted By
           </p>
           <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-px bg-espresso/8">
             {[
