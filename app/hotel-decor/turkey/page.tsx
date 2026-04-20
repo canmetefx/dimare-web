@@ -28,6 +28,46 @@ const PRODUCTS = [
   { title: 'Outdoor Decor', desc: 'Weather-resistant pieces for pool decks, beach clubs and terrace areas.' },
 ]
 
+const PROCESS = [
+  { step: '01', title: 'Brief & Site Visit', desc: 'We start with a free consultation — either on-site in Antalya / Bodrum / Aegean coast, or remotely via video call with floor plans and mood references.' },
+  { step: '02', title: 'Design Proposal', desc: 'Within 7–10 days, we deliver a custom proposal: sketches, material samples, color palette, and transparent pricing.' },
+  { step: '03', title: 'Production', desc: 'Handcrafted in our Antalya atelier. Typical lead time 4–8 weeks depending on project scope. Weekly progress photos.' },
+  { step: '04', title: 'Installation', desc: 'Our team handles delivery and installation on-property — coordinated around your season and guest schedule.' },
+]
+
+const FAQS = [
+  {
+    q: 'What is the typical lead time for a hotel décor project?',
+    a: 'Most projects ship within 4–8 weeks from design approval. Rush production is possible for urgent seasonal openings — please tell us your deadline and we will confirm feasibility within 48 hours.',
+  },
+  {
+    q: 'Do you work with hotels outside Turkey?',
+    a: 'Yes. We have completed projects in 12 countries including UAE, Greece, Italy, and Montenegro. We handle export logistics, customs documentation, and on-site installation.',
+  },
+  {
+    q: 'Are your pieces suitable for outdoor and poolside use?',
+    a: 'Yes. We use UV-stable, salt-resistant fibres and marine-grade hardware for outdoor installations. All outdoor pieces come with care instructions and are contract-grade.',
+  },
+  {
+    q: 'Can you match our existing brand identity and color palette?',
+    a: 'Every project is fully bespoke. Share your brand book, material samples, or existing interior photography — we will design around your identity, not ours.',
+  },
+  {
+    q: 'Is there a minimum project size?',
+    a: 'No strict minimum, but most hotel engagements start around €5,000. For full-property installations, projects typically range €25,000–€150,000 depending on scale.',
+  },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+}
+
 export default function HotelDecorTurkeyPage() {
   const router = useRouter()
   const [form, setForm] = useState({
@@ -66,6 +106,8 @@ export default function HotelDecorTurkeyPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
       {/* Hero */}
       <section className="min-h-screen flex flex-col justify-center pt-32 pb-20 px-6 md:px-12 bg-linen-light relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03]"
@@ -198,6 +240,60 @@ export default function HotelDecorTurkeyPage() {
             <Link href="/urunler" className="btn-secondary">
               View All Products →
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Process */}
+      <section className="section-padding bg-linen-light border-t border-espresso/10">
+        <div className="max-w-screen-xl mx-auto">
+          <AnimateOnScroll>
+            <span className="inline-flex items-center gap-3 text-[10px] tracking-widest uppercase text-gold mb-4">
+              <span className="w-6 h-px bg-gold" />
+              How We Work
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl font-light text-espresso mb-16">
+              From Brief to Installation
+            </h2>
+          </AnimateOnScroll>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-espresso/10">
+            {PROCESS.map((p, i) => (
+              <AnimateOnScroll key={p.step} delay={i * 80}>
+                <div className="bg-linen-light p-8 h-full">
+                  <p className="font-serif text-5xl text-gold/30 font-light mb-4">{p.step}</p>
+                  <h3 className="font-serif text-xl text-espresso font-light mb-3">{p.title}</h3>
+                  <p className="text-espresso/45 text-xs font-light leading-relaxed">{p.desc}</p>
+                </div>
+              </AnimateOnScroll>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="section-padding bg-cream border-t border-espresso/10">
+        <div className="max-w-3xl mx-auto">
+          <AnimateOnScroll>
+            <span className="inline-flex items-center gap-3 text-[10px] tracking-widest uppercase text-gold mb-4">
+              <span className="w-6 h-px bg-gold" />
+              Frequently Asked
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl font-light text-espresso mb-16">
+              Questions We Hear Often
+            </h2>
+          </AnimateOnScroll>
+          <div className="divide-y divide-espresso/10 border-y border-espresso/10">
+            {FAQS.map((f, i) => (
+              <AnimateOnScroll key={f.q} delay={i * 60}>
+                <details className="group py-6 cursor-pointer">
+                  <summary className="flex items-center justify-between gap-6 list-none">
+                    <h3 className="font-serif text-lg md:text-xl text-espresso font-light pr-4">{f.q}</h3>
+                    <span className="flex-shrink-0 w-8 h-8 border border-espresso/20 flex items-center justify-center text-gold text-lg transition-transform duration-300 group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-4 text-espresso/55 text-sm font-light leading-relaxed max-w-2xl">{f.a}</p>
+                </details>
+              </AnimateOnScroll>
+            ))}
           </div>
         </div>
       </section>
