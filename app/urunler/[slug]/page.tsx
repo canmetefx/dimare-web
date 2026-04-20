@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await getProductBySlug(params.slug)
   if (!product) return {}
   return {
-    title: product.metaTitle ?? `${product.title} — DiMare Design`,
+    title: product.metaTitle ?? `${product.title} — Dimare Design`,
     description: product.metaDescription ?? product.description ?? siteConfig.description,
     alternates: { canonical: `${siteConfig.url}/urunler/${params.slug}` },
     openGraph: {
@@ -45,13 +45,13 @@ export default async function ProductDetailPage({ params }: Props) {
     '@type': 'Product',
     name: product.title,
     description: product.description,
-    brand: { '@type': 'Brand', name: 'DiMare Design' },
+    brand: { '@type': 'Brand', name: 'Dimare Design' },
     image: mainImageUrl ? [mainImageUrl] : [],
     offers: {
       '@type': 'Offer',
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
-      seller: { '@type': 'Organization', name: 'DiMare Design' },
+      seller: { '@type': 'Organization', name: 'Dimare Design' },
     },
     url: `${siteConfig.url}/urunler/${params.slug}`,
   }

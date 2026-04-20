@@ -311,7 +311,7 @@ export default function TeklifPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'ContactPage',
-            name: 'DiMare Design — Ücretsiz Teklif',
+            name: 'Dimare Design — Ücretsiz Teklif',
             description: 'Oteliniz için el yapımı makrome ve oturma alanı dekor teklifi alın. Rixos, Regnum ve Vogue Bodrum\'un güvendiği Türk zanaatkar atölyesi.',
             url: 'https://www.dimare.design/teklif',
           }),

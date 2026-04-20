@@ -11,7 +11,7 @@ export const revalidate = 300
 export const metadata: Metadata = generatePageMeta({
   title: 'Projects — Luxury Hotel Décor Portfolio',
   description:
-    'Explore DiMare Design projects for luxury hotels including Rixos, TUI, and Regnum Carya — bespoke macramé installations, woven textiles, and bohemian furniture.',
+    'Explore Dimare Design projects for luxury hotels including Rixos, TUI, and Regnum Carya — bespoke macramé installations, woven textiles, and bohemian furniture.',
   path: '/projeler',
 })
 
@@ -61,8 +61,8 @@ export default async function ProjectsPage() {
   const projectSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'DiMare Design — Hotel Décor Projects',
-    description: 'Luxury hotel décor projects designed by DiMare Design',
+    name: 'Dimare Design — Hotel Décor Projects',
+    description: 'Luxury hotel décor projects designed by Dimare Design',
     url: 'https://www.dimare.design/projeler',
     mainEntity: projects.map((p: { name: string; description?: string; location?: string; year?: string }) => ({
       '@type': 'CreativeWork',

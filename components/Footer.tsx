@@ -90,7 +90,7 @@ export default async function Footer() {
 
         <div className="pt-8 border-t border-espresso/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[10px] text-espresso/25 tracking-wide">
-            © {new Date().getFullYear()} DiMare Design. All rights reserved.
+            © {new Date().getFullYear()} Dimare Design. All rights reserved.
           </p>
           <nav className="flex items-center gap-6">
             {legalLinks.map((link) => (

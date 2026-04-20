@@ -9,9 +9,9 @@ import { sanityImageUrl } from '@/lib/sanity-image'
 export const revalidate = 300
 
 export const metadata: Metadata = generatePageMeta({
-  title: 'About — DiMare Design Story',
+  title: 'About — Dimare Design Story',
   description:
-    'DiMare Design is a Turkish artisan studio creating handcrafted bohemian décor for luxury hotels and resorts. 8 years of experience, 150+ projects, 40+ luxury hotels.',
+    'Dimare Design is a Turkish artisan studio creating handcrafted bohemian décor for luxury hotels and resorts. 8 years of experience, 150+ projects, 40+ luxury hotels.',
   path: '/hakkimizda',
 })
 
@@ -45,12 +45,12 @@ const timeline = [
 const aboutSchema = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
-  name: 'About DiMare Design',
-  description: 'The story and values of DiMare Design studio',
+  name: 'About Dimare Design',
+  description: 'The story and values of Dimare Design studio',
   url: 'https://www.dimare.design/hakkimizda',
   mainEntity: {
     '@type': 'Organization',
-    name: 'DiMare Design',
+    name: 'Dimare Design',
     foundingDate: '2016',
     description: 'Turkish artisan studio creating handcrafted bohemian décor for luxury hotels and resorts.',
     numberOfEmployees: { '@type': 'QuantitativeValue', value: '10-50' },
@@ -95,7 +95,7 @@ export default async function AboutPage() {
           <AnimateOnScroll direction="left">
             <div className="aspect-[4/5] relative overflow-hidden bg-linen-dark">
               {aboutImageUrl ? (
-                <Image src={aboutImageUrl} alt="DiMare Design studio" fill className="object-cover" sizes="(max-width:1024px) 100vw, 50vw" />
+                <Image src={aboutImageUrl} alt="Dimare Design studio" fill className="object-cover" sizes="(max-width:1024px) 100vw, 50vw" />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="font-serif text-[200px] text-gold/5 leading-none select-none">D</span>

@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = await getProjectBySlug(params.slug)
   if (!project) return {}
   return {
-    title: project.metaTitle ?? `${project.name} — DiMare Design`,
+    title: project.metaTitle ?? `${project.name} — Dimare Design`,
     description: project.metaDescription ?? project.description ?? siteConfig.description,
     alternates: { canonical: `${siteConfig.url}/projeler/${params.slug}` },
     openGraph: {
@@ -46,7 +46,7 @@ export default async function ProjectDetailPage({ params }: Props) {
     name: project.name,
     description: project.description,
     dateCreated: project.year,
-    creator: { '@type': 'Organization', name: 'DiMare Design', url: siteConfig.url },
+    creator: { '@type': 'Organization', name: 'Dimare Design', url: siteConfig.url },
     locationCreated: project.location ? { '@type': 'Place', name: project.location } : undefined,
     url: `${siteConfig.url}/projeler/${params.slug}`,
     image: coverUrl ?? undefined,

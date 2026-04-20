@@ -58,8 +58,8 @@ export default function IletisimPage() {
   const contactSchema = {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
-    name: 'DiMare Design — Contact',
-    description: 'Contact DiMare Design for your luxury hotel décor project. Free consultation and project brief form.',
+    name: 'Dimare Design — Contact',
+    description: 'Contact Dimare Design for your luxury hotel décor project. Free consultation and project brief form.',
     url: 'https://www.dimare.design/iletisim',
   }
 

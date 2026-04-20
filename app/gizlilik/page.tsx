@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | DiMare Design',
-  description: 'Privacy policy for DiMare Design — how we collect, use, and protect your personal data.',
+  title: 'Privacy Policy | Dimare Design',
+  description: 'Privacy policy for Dimare Design — how we collect, use, and protect your personal data.',
   robots: { index: true, follow: true },
 }
 
@@ -18,7 +18,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-serif text-2xl text-espresso mb-4">1. Data Controller</h2>
             <p>
-              DiMare Design (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is the data controller for personal data collected
+              Dimare Design (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is the data controller for personal data collected
               through this website (<strong>dimare.design</strong>). We are committed to protecting your
               privacy in accordance with the Turkish Personal Data Protection Law (KVKK, Law No. 6698)
               and the EU General Data Protection Regulation (GDPR) where applicable.

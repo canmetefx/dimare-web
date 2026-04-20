@@ -263,7 +263,7 @@ export default function Katalog2026Page() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebPage',
-            name: 'DiMare Design 2026 Yaz Kataloğu',
+            name: 'Dimare Design 2026 Yaz Kataloğu',
             description: '2026 Yaz koleksiyonu — 20 ürün, 4 mekan kategorisi. El yapımı makrome, dokuma tekstil ve bohem mobilya. Otel dekor kataloğu ücretsiz isteyin.',
             url: 'https://www.dimare.design/katalog-2026',
           }),

@@ -30,7 +30,7 @@ const faqSchema = {
       name: 'Can I order custom macramé for my luxury hotel?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. DiMare Design creates fully customised macramé and bohemian décor for luxury hotels and resorts. Contact us with your dimensions, colour palette, and material preferences.',
+        text: 'Yes. Dimare Design creates fully customised macramé and bohemian décor for luxury hotels and resorts. Contact us with your dimensions, colour palette, and material preferences.',
       },
     },
     {
@@ -75,7 +75,7 @@ export default async function HomePage() {
           {heroImageUrl ? (
             <Image
               src={heroImageUrl}
-              alt="DiMare Design luxury hotel décor — bohemian macramé and handcrafted furniture"
+              alt="Dimare Design luxury hotel décor — bohemian macramé and handcrafted furniture"
               fill priority className="object-cover object-center" sizes="100vw"
             />
           ) : (
@@ -301,7 +301,7 @@ export default async function HomePage() {
               {settings?.aboutImage ? (
                 <Image
                   src={sanityImageUrl(settings.aboutImage, 800, 800)}
-                  alt="DiMare Design studio — handcrafted bohemian décor"
+                  alt="Dimare Design studio — handcrafted bohemian décor"
                   fill className="object-cover"
                   sizes="(max-width:1024px) 100vw, 50vw"
                 />
@@ -324,7 +324,7 @@ export default async function HomePage() {
                 <em className="text-gold not-italic">hospitality.</em>
               </h2>
               <p className="text-espresso/50 text-sm leading-relaxed mb-6 font-light">
-                DiMare Design is a contract-grade artisan studio creating bespoke bohemian décor for premier hotels and resorts. Trusted by leading hospitality brands worldwide — Rixos, TUI, Regnum Carya, and beyond.
+                Dimare Design is a contract-grade artisan studio creating bespoke bohemian décor for premier hotels and resorts. Trusted by leading hospitality brands worldwide — Rixos, TUI, Regnum Carya, and beyond.
               </p>
               <p className="text-espresso/50 text-sm leading-relaxed mb-10 font-light">
                 Every project is shaped by understanding the hotel&apos;s identity, the experience your guests will feel, and the constraints the space brings. Nothing is standard — everything is designed for you.

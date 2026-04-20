@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import ConversionEvents from '@/components/ConversionEvents'
 
 export const metadata: Metadata = {
-  title: 'Thank You | DiMare Design',
+  title: 'Thank You | Dimare Design',
   description: 'Your project brief has been received. We will be in touch shortly.',
   robots: { index: false, follow: false },
 }

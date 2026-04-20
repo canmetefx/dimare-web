@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | DiMare Design',
-  description: 'Terms and conditions for using the DiMare Design website and services.',
+  title: 'Terms of Service | Dimare Design',
+  description: 'Terms and conditions for using the Dimare Design website and services.',
   robots: { index: true, follow: true },
 }
 
@@ -18,7 +18,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-serif text-2xl text-espresso mb-4">1. About Us</h2>
             <p>
-              DiMare Design is a luxury handcrafted textile and décor studio based in Turkey, specialising
+              Dimare Design is a luxury handcrafted textile and décor studio based in Turkey, specialising
               in bespoke macramé installations, woven textiles, and artisan furniture for hospitality and
               residential projects. These Terms govern your use of <strong>dimare.design</strong> (the &ldquo;Site&rdquo;).
             </p>
@@ -47,7 +47,7 @@ export default function TermsPage() {
               Etsy store or Shopify store, which operate under their own terms and conditions.
             </p>
             <p className="mt-4">
-              All bespoke projects are subject to a separate written agreement between DiMare Design and
+              All bespoke projects are subject to a separate written agreement between Dimare Design and
               the client, which supersedes any general information on this Site.
             </p>
             <p className="mt-4">
@@ -60,7 +60,7 @@ export default function TermsPage() {
             <h2 className="font-serif text-2xl text-espresso mb-4">4. Intellectual Property</h2>
             <p>
               All content on this Site — including photographs, illustrations, design work, text, and
-              brand assets — is the exclusive intellectual property of DiMare Design or its licensors,
+              brand assets — is the exclusive intellectual property of Dimare Design or its licensors,
               and is protected by Turkish and international copyright law.
             </p>
             <p className="mt-4">
@@ -94,7 +94,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-serif text-2xl text-espresso mb-4">7. Limitation of Liability</h2>
             <p>
-              To the fullest extent permitted by applicable law, DiMare Design shall not be liable for
+              To the fullest extent permitted by applicable law, Dimare Design shall not be liable for
               any indirect, incidental, special, or consequential damages arising from your use of, or
               inability to use, the Site or its content.
             </p>
@@ -104,7 +104,7 @@ export default function TermsPage() {
             <h2 className="font-serif text-2xl text-espresso mb-4">8. Third-Party Links</h2>
             <p>
               The Site may contain links to third-party websites (Etsy, Shopify, Pinterest, Instagram).
-              These links are provided for convenience only. DiMare Design has no control over, and
+              These links are provided for convenience only. Dimare Design has no control over, and
               accepts no responsibility for, the content or practices of third-party sites.
             </p>
           </section>

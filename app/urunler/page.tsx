@@ -11,7 +11,7 @@ export const revalidate = 300
 export const metadata: Metadata = generatePageMeta({
   title: 'Products — Handcrafted Hotel Décor Collections',
   description:
-    'DiMare Design\'s bespoke macramé, woven textiles, and bohemian furniture for premier hotels and resorts. Shop on Etsy or Shopify — or enquire for custom orders.',
+    'Dimare Design\'s bespoke macramé, woven textiles, and bohemian furniture for premier hotels and resorts. Shop on Etsy or Shopify — or enquire for custom orders.',
   path: '/urunler',
 })
 
@@ -76,7 +76,7 @@ export default async function ProductsPage() {
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'DiMare Design Handcrafted Hotel Décor Collection',
+    name: 'Dimare Design Handcrafted Hotel Décor Collection',
     description: 'Bespoke macramé, woven textiles and bohemian furniture for premier hotels',
     url: 'https://www.dimare.design/urunler',
     numberOfItems: products.length,
@@ -87,7 +87,7 @@ export default async function ProductsPage() {
         '@type': 'Product',
         name: p.title,
         description: p.description,
-        brand: { '@type': 'Brand', name: 'DiMare Design' },
+        brand: { '@type': 'Brand', name: 'Dimare Design' },
         offers: {
           '@type': 'Offer',
           priceCurrency: 'USD',
