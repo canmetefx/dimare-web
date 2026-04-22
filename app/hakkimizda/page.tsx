@@ -11,7 +11,7 @@ export const revalidate = 300
 export const metadata: Metadata = generatePageMeta({
   title: 'About — Dimare Design Story',
   description:
-    'Dimare Design is a Turkish artisan studio creating handcrafted bohemian décor for luxury hotels and resorts. 8 years of experience, 150+ projects, 40+ luxury hotels.',
+    'Dimare Design is a Turkish artisan studio creating handcrafted bohemian décor for luxury hotels and resorts. 8 years of experience, 90+ projects, 20 premier hotels.',
   path: '/hakkimizda',
 })
 
@@ -39,7 +39,7 @@ const timeline = [
   { year: '2018', event: 'First corporate contract signed with Rixos Hotels.' },
   { year: '2020', event: 'Digital sales channels launched — Etsy and Shopify stores opened.' },
   { year: '2022', event: 'International projects in Greece, Dubai, and Germany.' },
-  { year: '2024', event: '150+ projects, 40+ luxury hotels, 12 countries.' },
+  { year: '2024', event: '90+ projects, 20 premier hotels, 3 countries.' },
 ]
 
 const aboutSchema = {
@@ -115,7 +115,7 @@ export default async function AboutPage() {
               <h2 className="font-serif text-4xl font-light text-espresso mb-8 leading-tight">
                 From a small workshop
                 <br />
-                <em className="text-gold not-italic">to 40+ premier hotels</em>
+                <em className="text-gold not-italic">to 20 premier hotels</em>
               </h2>
               <div className="space-y-5 text-espresso/50 text-sm font-light leading-relaxed">
                 <p>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -44,28 +45,17 @@ export default function Header() {
       >
         <div className="max-w-screen-xl mx-auto px-6 md:px-12 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <svg
-              width="28" height="28" viewBox="0 0 28 28" fill="none"
-              className={`transition-colors duration-500 flex-shrink-0 ${
-                !scrolled && isHeroPage ? 'text-gold-light' : 'text-gold'
+          <Link href="/" className="flex items-center group" aria-label="Dimare Design — Home">
+            <Image
+              src="/brand/dimare-logo-gold.png"
+              alt="Dimare Design"
+              width={160}
+              height={160}
+              priority
+              className={`h-12 md:h-14 w-auto transition-opacity duration-500 ${
+                !scrolled && isHeroPage ? 'brightness-110' : ''
               }`}
-            >
-              <rect x="14" y="2" width="16" height="16" rx="1" transform="rotate(45 14 2)" stroke="currentColor" strokeWidth="0.8" fill="none"/>
-              <rect x="14" y="6" width="10" height="10" rx="0.5" transform="rotate(45 14 6)" fill="currentColor" fillOpacity="0.15"/>
-              <line x1="14" y1="6" x2="14" y2="22" stroke="currentColor" strokeWidth="0.6" opacity="0.5"/>
-              <line x1="6" y1="14" x2="22" y2="14" stroke="currentColor" strokeWidth="0.6" opacity="0.5"/>
-            </svg>
-            <div className="flex flex-col items-start">
-              <span className={`font-serif text-2xl font-light tracking-[0.15em] leading-none group-hover:text-gold transition-colors duration-500 ${
-                !scrolled && isHeroPage ? 'text-cream-light' : 'text-espresso'
-              }`}>
-                DIMARE
-              </span>
-              <span className="text-[9px] tracking-widest3 text-gold uppercase mt-0.5">
-                Design
-              </span>
-            </div>
+            />
           </Link>
 
           {/* Desktop Nav */}

@@ -91,7 +91,7 @@ export default async function ProjectsPage() {
               <em className="text-gold not-italic">Projects</em>
             </h1>
             <p className="text-espresso/50 text-sm font-light max-w-md leading-relaxed">
-              Discover selected works from our 150+ completed projects — each one crafted to create an unforgettable experience for hotel guests.
+              Discover selected works from our 90+ completed projects — each one crafted to create an unforgettable experience for hotel guests.
             </p>
           </AnimateOnScroll>
         </div>

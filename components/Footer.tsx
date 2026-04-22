@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { getSiteSettings } from '@/sanity/queries'
 
 const footerLinks = [
@@ -31,17 +32,14 @@ export default async function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
           {/* Brand */}
           <div>
-            <Link href="/" className="inline-flex items-center gap-3 mb-6 group">
-              <svg width="26" height="26" viewBox="0 0 28 28" fill="none" className="text-gold flex-shrink-0">
-                <rect x="14" y="2" width="16" height="16" rx="1" transform="rotate(45 14 2)" stroke="currentColor" strokeWidth="0.8" fill="none"/>
-                <rect x="14" y="6" width="10" height="10" rx="0.5" transform="rotate(45 14 6)" fill="currentColor" fillOpacity="0.15"/>
-                <line x1="14" y1="6" x2="14" y2="22" stroke="currentColor" strokeWidth="0.6" opacity="0.5"/>
-                <line x1="6" y1="14" x2="22" y2="14" stroke="currentColor" strokeWidth="0.6" opacity="0.5"/>
-              </svg>
-              <div className="flex flex-col items-start">
-                <span className="font-serif text-3xl font-light tracking-[0.15em] text-espresso group-hover:text-gold transition-colors duration-500">DIMARE</span>
-                <span className="text-[9px] tracking-widest3 text-gold uppercase mt-0.5">Design</span>
-              </div>
+            <Link href="/" className="inline-flex items-center mb-6 group" aria-label="Dimare Design — Home">
+              <Image
+                src="/brand/dimare-logo-gold.png"
+                alt="Dimare Design"
+                width={200}
+                height={200}
+                className="h-16 w-auto"
+              />
             </Link>
             <p className="text-espresso/40 text-xs leading-relaxed font-light max-w-xs">
               Bespoke handcrafted décor for premier hotels and resorts. Every piece is a work of art, crafted by hand in Turkey.

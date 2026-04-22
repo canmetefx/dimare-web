@@ -15,9 +15,9 @@ const REFERENCES = [
 ]
 
 const STATS = [
-  { value: '150+', label: 'Projects Completed' },
-  { value: '40+', label: 'Premier Hotels' },
-  { value: '12', label: 'Countries' },
+  { value: '90+', label: 'Projects Completed' },
+  { value: '20', label: 'Premier Hotels' },
+  { value: '3', label: 'Countries' },
   { value: '8 yrs', label: 'Industry Experience' },
 ]
 
@@ -42,7 +42,7 @@ const FAQS = [
   },
   {
     q: 'Do you work with hotels outside Turkey?',
-    a: 'Yes. We have completed projects in 12 countries including UAE, Greece, Italy, and Montenegro. We handle export logistics, customs documentation, and on-site installation.',
+    a: 'Yes. We have delivered projects in 3 countries — Turkey, Greece, and the UAE — with additional work in Germany. We handle export logistics, customs documentation, and on-site installation.',
   },
   {
     q: 'Are your pieces suitable for outdoor and poolside use?',
@@ -125,7 +125,7 @@ export default function HotelDecorTurkeyPage() {
                 <em className="text-gold not-italic">for Luxury Hotels</em>
               </h1>
               <p className="text-espresso/55 text-base font-light leading-relaxed mb-10 max-w-md">
-                Bespoke macramé installations, handwoven furniture and natural textile collections — trusted by Rixos, TUI and 40+ premier hotels across 12 countries.
+                Bespoke macramé installations, handwoven furniture and natural textile collections — trusted by Rixos, TUI and 20 premier hotels across 3 countries.
               </p>
 
               {/* Stats */}

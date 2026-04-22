@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 
 
 const fallbackStats = [
-  { value: '150+', label: 'Completed Projects' },
-  { value: '40+', label: 'Luxury Hotels' },
-  { value: '12', label: 'Countries' },
+  { value: '90+', label: 'Completed Projects' },
+  { value: '20', label: 'Premier Hotels' },
+  { value: '3', label: 'Countries' },
   { value: '8', label: 'Years Experience' },
 ]
 

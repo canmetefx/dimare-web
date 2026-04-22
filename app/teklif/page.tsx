@@ -15,9 +15,9 @@ const REFERENCES = [
 ]
 
 const STATS = [
-  { value: '150+', label: 'Tamamlanan Proje' },
-  { value: '40+', label: 'Premier Otel' },
-  { value: '12', label: 'Ülke' },
+  { value: '90+', label: 'Tamamlanan Proje' },
+  { value: '20', label: 'Premier Otel' },
+  { value: '3', label: 'Ülke' },
   { value: '8 yıl', label: 'Sektör Deneyimi' },
 ]
 
