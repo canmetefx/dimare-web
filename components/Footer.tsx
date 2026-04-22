@@ -36,9 +36,9 @@ export default async function Footer() {
               <Image
                 src="/brand/dimare-logo-gold.png"
                 alt="Dimare Design"
-                width={200}
+                width={280}
                 height={200}
-                className="h-16 w-auto"
+                className="h-24 w-auto"
               />
             </Link>
             <p className="text-espresso/40 text-xs leading-relaxed font-light max-w-xs">

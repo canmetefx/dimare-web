@@ -49,10 +49,10 @@ export default function Header() {
             <Image
               src="/brand/dimare-logo-gold.png"
               alt="Dimare Design"
-              width={160}
-              height={160}
+              width={240}
+              height={172}
               priority
-              className={`h-12 md:h-14 w-auto transition-opacity duration-500 ${
+              className={`h-16 md:h-20 w-auto transition-opacity duration-500 ${
                 !scrolled && isHeroPage ? 'brightness-110' : ''
               }`}
             />
