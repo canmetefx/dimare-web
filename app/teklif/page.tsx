@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import AnimateOnScroll from '@/components/AnimateOnScroll'
@@ -77,9 +77,44 @@ const faqSchema = {
   })),
 }
 
+interface UtmParams {
+  source: string
+  medium: string
+  campaign: string
+  content: string
+  term: string
+}
+
+declare global {
+  interface Window {
+    dataLayer?: Array<Record<string, unknown>>
+  }
+}
+
+function readUtms(): UtmParams {
+  if (typeof window === 'undefined') {
+    return { source: '', medium: '', campaign: '', content: '', term: '' }
+  }
+  const qs = new URLSearchParams(window.location.search)
+  return {
+    source: qs.get('utm_source') || '',
+    medium: qs.get('utm_medium') || '',
+    campaign: qs.get('utm_campaign') || '',
+    content: qs.get('utm_content') || '',
+    term: qs.get('utm_term') || '',
+  }
+}
+
 export default function TeklifPage() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [utms, setUtms] = useState<UtmParams>({
+    source: '',
+    medium: '',
+    campaign: '',
+    content: '',
+    term: '',
+  })
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -87,6 +122,22 @@ export default function TeklifPage() {
     phone: '',
     projectDetail: '',
   })
+
+  // Capture UTM params on mount + push landing event to dataLayer for attribution
+  useEffect(() => {
+    const captured = readUtms()
+    setUtms(captured)
+    if (typeof window !== 'undefined' && window.dataLayer && captured.source) {
+      window.dataLayer.push({
+        event: 'paid_landing_view',
+        utm_source: captured.source,
+        utm_medium: captured.medium,
+        utm_campaign: captured.campaign,
+        utm_content: captured.content,
+        utm_term: captured.term,
+      })
+    }
+  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -105,6 +156,11 @@ export default function TeklifPage() {
           ...formData,
           _subject: `[Teklif Talebi] ${formData.company} — ${formData.name}`,
           source: '/teklif',
+          utm_source: utms.source,
+          utm_medium: utms.medium,
+          utm_campaign: utms.campaign,
+          utm_content: utms.content,
+          utm_term: utms.term,
         }),
       })
       if (res.ok) {
