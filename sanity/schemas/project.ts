@@ -47,6 +47,27 @@ export const project = defineType({
       },
     }),
     defineField({
+      name: 'collections',
+      title: 'Koleksiyonlar (çoklu seçim)',
+      type: 'array',
+      group: 'basics',
+      description: 'Bu proje hangi koleksiyonlara ait? (bir proje birden fazla koleksiyonda olabilir)',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags',
+        list: [
+          { title: 'Hotel Pool Shading', value: 'hotel-pool-shading' },
+          { title: 'Hospitality Lobby Décor', value: 'hospitality-lobby-decor' },
+          { title: 'Suite Macramé', value: 'suite-macrame' },
+          { title: 'Spa & Wellness', value: 'spa-wellness' },
+          { title: 'Beach Club Design', value: 'beach-club-design' },
+          { title: 'Resort Restaurant', value: 'resort-restaurant' },
+          { title: 'Hotel Signature Weaves', value: 'hotel-signature-weaves' },
+          { title: '2026 Summer Collection', value: '2026-summer-collection' },
+        ],
+      },
+    }),
+    defineField({
       name: 'propertyType',
       title: 'Mülk Tipi',
       type: 'string',
