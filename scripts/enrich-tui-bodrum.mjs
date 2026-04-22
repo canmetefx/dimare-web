@@ -1,7 +1,7 @@
 // Enrich TUI Magic Life Bodrum project with real archive assets + case study copy
 // Run with: node scripts/enrich-tui-bodrum.mjs
 //
-// Reads assets from: /Volumes/M-SSD-1/DiMare 2025/& Clients & Footages/TUI Bodrum/
+// Reads assets from: /Volumes/M-SSD-1/DiMare 2025/01-Hotels/TUI-Bodrum/
 
 import { readFileSync, existsSync } from 'node:fs'
 import { resolve, basename } from 'node:path'
@@ -32,7 +32,7 @@ const client = createClient({
   useCdn: false,
 })
 
-const ARCHIVE = '/Volumes/M-SSD-1/DiMare 2025/& Clients & Footages/TUI Bodrum'
+const ARCHIVE = '/Volumes/M-SSD-1/DiMare 2025/01-Hotels/TUI-Bodrum'
 const PRODUCT = `${ARCHIVE}/TUI Ürün Yerleştirme`
 const MONTAJ = `${ARCHIVE}/TUI 17-19 NİSAN MONTAJ/footages`
 

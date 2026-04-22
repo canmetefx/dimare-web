@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Dimare Ad Creative Reformat Pipeline
 # -------------------------------------
-# Takes master video files from /Tüm Videolar/ and outputs 3 platform-ready
+# Takes master video files from /04-Ads-Creative/Masters/ and outputs 3 platform-ready
 # formats each:
 #   - 16:9 1920x1080 ≤30s  (Google/YouTube)
 #   - 9:16 1080x1920 ≤60s  (Reels / Shorts / Stories)
@@ -21,7 +21,7 @@ if ! command -v ffmpeg >/dev/null 2>&1; then
   exit 1
 fi
 
-SRC_DIR="/Volumes/M-SSD-1/DiMare 2025/Tüm Videolar"
+SRC_DIR="/Volumes/M-SSD-1/DiMare 2025/04-Ads-Creative/Masters"
 OUT_ROOT="$HOME/Desktop/dimare-ads-out"
 mkdir -p "$OUT_ROOT"
 
