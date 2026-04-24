@@ -64,9 +64,15 @@ encode_1x1() {
     -c:a aac -b:a 128k -movflags +faststart "$out"
 }
 
+# Recursively locate each master (files are organized into subdirs like "& Hero Reel/")
+find_master() {
+  local name="$1"
+  find "$SRC_DIR" -type f -name "$name" ! -name '._*' 2>/dev/null | head -1
+}
+
 for m in "${MASTERS[@]}"; do
-  src="$SRC_DIR/$m"
-  if [ ! -f "$src" ]; then
+  src="$(find_master "$m")"
+  if [ -z "$src" ] || [ ! -f "$src" ]; then
     echo "  ⤼ skip (missing): $m"
     continue
   fi

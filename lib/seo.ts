@@ -8,6 +8,8 @@ export const siteConfig = {
   localeAlt: 'en_US',
   ogImage: 'https://www.dimare.design/opengraph-image',
   twitter: '@dimaredesign',
+  email: 'dimaredesignstore@gmail.com',
+  instagram: 'https://www.instagram.com/dimare.design',
   address: {
     country: 'Turkey',
     region: 'TR',
@@ -38,13 +40,14 @@ export const organizationSchema = {
   logo: `${siteConfig.url}/logo.png`,
   description: siteConfig.description,
   sameAs: [
-    'https://www.instagram.com/dimaredesign',
+    'https://www.instagram.com/dimare.design',
     'https://www.etsy.com/shop/dimaredesign',
     'https://www.pinterest.com/dimaredesign',
   ],
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
+    email: 'dimaredesignstore@gmail.com',
     availableLanguage: ['Turkish', 'English'],
   },
 }

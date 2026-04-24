@@ -24,7 +24,7 @@ export default async function Footer() {
     settings?.shopifyUrl && { href: settings.shopifyUrl, label: 'Shopify' },
   ].filter(Boolean) as { href: string; label: string }[]
 
-  const contactEmail = settings?.contactEmail ?? 'info@dimare.design'
+  const contactEmail = settings?.contactEmail ?? 'dimaredesignstore@gmail.com'
 
   return (
     <footer className="border-t border-espresso/10 bg-linen-dark">

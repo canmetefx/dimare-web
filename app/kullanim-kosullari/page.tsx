@@ -131,7 +131,7 @@ export default function TermsPage() {
             <h2 className="font-serif text-2xl text-espresso mb-4">11. Contact</h2>
             <p>
               For any questions regarding these Terms, please contact us at:{' '}
-              <a href="mailto:info@dimare.design" className="text-gold hover:underline">info@dimare.design</a>
+              <a href="mailto:dimaredesignstore@gmail.com" className="text-gold hover:underline">dimaredesignstore@gmail.com</a>
             </p>
           </section>
 

@@ -58,10 +58,10 @@ Hangi video hangi kampanyada, hangi UTM ile, hangi format. Ads Manager'a yükler
 
 | Master | Format | Primary Text Varyantı | Campaign UTM |
 |--------|--------|----------------------|--------------|
-| `NG-Reels-1.2.mp4` | 9:16 Reels | "Rixos, Regnum ve Vogue'un dekor atölyesi..." (uzun v.) | `utm_content=ngreels_longcopy` |
+| `NG-Reels-1.2.mp4` | 9:16 Reels | "Rixos, Regnum ve Vogue projelerine dekor ürettik..." (uzun v.) | `utm_content=ngreels_longcopy` |
 | `Rixos-Gölgelendirme-Reels.mp4` | 9:16 Reels | "Oteliniz için 4-8 haftada el yapımı kurulum" (kısa v.) | `utm_content=rixos_shortcopy` |
 | `Vogue - Top Perde1.mp4` | 1:1 Feed (crop) | "2026 yaz sezonu için son sipariş tarihleri" (urgency) | `utm_content=vogue_urgency` |
-| `2-REGNUM PERDE.mp4` | 9:16 Reels | "150+ otel. 40+ premier marka." (social proof) | `utm_content=regnum_socialproof` |
+| `2-REGNUM PERDE.mp4` | 9:16 Reels | "90+ proje. 20 premier otel. 8 yıl." (social proof) | `utm_content=regnum_socialproof` |
 
 ### 2b. Awareness — Instagram Reels organik destek
 
@@ -70,7 +70,7 @@ Hangi video hangi kampanyada, hangi UTM ile, hangi format. Ads Manager'a yükler
 | Objective | **Engagement** (Reel view + profile visit) |
 | Bütçe | ₺50/gün |
 | Hedef | TR, 25-55, hospitality + luxury lifestyle interests |
-| CTA | "Daha fazlası @dimaredesign" |
+| CTA | "Daha fazlası @dimare.design" |
 
 **Creative:** Meta Leadgen kampanyasında kullanılan Reels'in aynıları, farklı CTA.
 
@@ -80,16 +80,16 @@ Hangi video hangi kampanyada, hangi UTM ile, hangi format. Ads Manager'a yükler
 
 ### Variant A — Long Copy (Reels için uygun)
 ```
-Rixos Premium Belek, Regnum Carya ve Vogue Supreme Bodrum'un
-dış mekan dekorunu tasarlayan atölye.
+Rixos Premium Belek, Regnum Carya ve Vogue Supreme Bodrum
+projelerine el yapımı dekor ürettik ve teslim ettik.
 
 Otelinizin 2026 yaz sezonu için özel koleksiyon hazırlayalım —
-tasarımdan kuruluma tek elden, 4-8 haftada teslim.
+briefden kuruluma tek elden, 4-8 haftada teslim.
 
 ✓ UV ve deniz tuzu dayanımlı malzeme
 ✓ Pantone renk eşleşmesi + logo motifi
 ✓ Paslanmaz çelik askı sistemi dahil
-✓ 150+ tamamlanmış proje referansı
+✓ 90+ tamamlanmış proje referansı
 
 Ücretsiz proje teklifi → dimare.design/teklif
 ```
@@ -106,15 +106,15 @@ Konsept + üretim + kurulum tek elden.
 ```
 2026 yaz sezonu için son sipariş tarihleri yaklaşıyor.
 
-Rixos, Regnum ve Vogue'un tercih ettiği el yapımı dekor
-atölyesinden oteliniz için ücretsiz proje teklifi alın.
+Rixos, Regnum ve Vogue projelerine dekor üreten atölyeden
+oteliniz için ücretsiz proje teklifi alın.
 
 dimare.design/teklif
 ```
 
 ### Variant D — Social Proof
 ```
-150+ tamamlanmış proje. 40+ premier otel markası. 8 yıl deneyim.
+90+ tamamlanmış proje. 20 premier otel. 8 yıl deneyim.
 
 Türkiye'nin el yapımı hospitality dekor atölyesi.
 Oteliniz için ücretsiz konsept çalışması.
@@ -134,7 +134,7 @@ dimare.design/teklif
 5. Türkiye'nin Hospitality Atölyesi
 6. Otel Havuz & Plaj Dekoru
 7. 4-8 Haftada Teslim
-8. 150+ Otel Projesi
+8. 90+ Otel Projesi
 9. Konsept + Üretim + Kurulum
 10. Premier Otel Dekor Atölyesi
 11. Sezon Öncesi Son Sipariş
@@ -146,7 +146,7 @@ dimare.design/teklif
 ### Açıklamalar (4 slot)
 1. Türkiye'nin önde gelen otellerinin dekorunu tasarlayan atölye. Konsept + üretim + kurulum tek elden, 4-8 haftada teslim.
 2. Havuz, lobi, suite için özel dokuma makrome, şemsiye, perde. UV ve deniz tuzu dayanımlı. Ücretsiz proje teklifi.
-3. Rixos Premium Belek, Regnum Carya ve Vogue Supreme Bodrum gibi premier otellerin seçimi. 150+ tamamlanmış proje.
+3. Rixos Premium Belek, Regnum Carya ve Vogue Supreme Bodrum projelerine dekor ürettik. 90+ tamamlanmış proje.
 4. Oteliniz için özel koleksiyon. Pantone renk eşleşmesi, logo motifi, paslanmaz çelik askı dahil. WhatsApp hızlı iletişim.
 
 ---

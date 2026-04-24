@@ -24,7 +24,7 @@ export default function PrivacyPage() {
               and the EU General Data Protection Regulation (GDPR) where applicable.
             </p>
             <p className="mt-3">
-              Contact: <a href="mailto:info@dimare.design" className="text-gold hover:underline">info@dimare.design</a>
+              Contact: <a href="mailto:dimaredesignstore@gmail.com" className="text-gold hover:underline">dimaredesignstore@gmail.com</a>
             </p>
           </section>
 
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
             </ul>
             <p className="mt-4">
               To exercise any of these rights, contact us at{' '}
-              <a href="mailto:info@dimare.design" className="text-gold hover:underline">info@dimare.design</a>.
+              <a href="mailto:dimaredesignstore@gmail.com" className="text-gold hover:underline">dimaredesignstore@gmail.com</a>.
             </p>
           </section>
 

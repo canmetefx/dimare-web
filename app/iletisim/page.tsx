@@ -110,8 +110,8 @@ export default function IletisimPage() {
                     <span className="w-8 h-px bg-gold/40 mt-3 flex-shrink-0" />
                     <div>
                       <p className="text-[10px] tracking-widest uppercase text-gold mb-1">Email</p>
-                      <a href="mailto:info@dimare.design" className="text-espresso/70 text-sm hover:text-gold transition-colors duration-300">
-                        info@dimare.design
+                      <a href="mailto:dimaredesignstore@gmail.com" className="text-espresso/70 text-sm hover:text-gold transition-colors duration-300">
+                        dimaredesignstore@gmail.com
                       </a>
                     </div>
                   </div>
@@ -120,8 +120,8 @@ export default function IletisimPage() {
                     <span className="w-8 h-px bg-gold/40 mt-3 flex-shrink-0" />
                     <div>
                       <p className="text-[10px] tracking-widest uppercase text-gold mb-1">Instagram</p>
-                      <a href="https://www.instagram.com/dimaredesign" target="_blank" rel="noopener noreferrer" className="text-espresso/70 text-sm hover:text-gold transition-colors duration-300">
-                        @dimaredesign
+                      <a href="https://www.instagram.com/dimare.design" target="_blank" rel="noopener noreferrer" className="text-espresso/70 text-sm hover:text-gold transition-colors duration-300">
+                        @dimare.design
                       </a>
                     </div>
                   </div>

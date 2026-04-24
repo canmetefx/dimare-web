@@ -87,6 +87,7 @@ interface UtmParams {
 
 declare global {
   interface Window {
+    fbq?: (...args: unknown[]) => void
     dataLayer?: Array<Record<string, unknown>>
   }
 }
@@ -108,6 +109,7 @@ function readUtms(): UtmParams {
 export default function TeklifPage() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState(false)
   const [utms, setUtms] = useState<UtmParams>({
     source: '',
     medium: '',
@@ -164,11 +166,16 @@ export default function TeklifPage() {
         }),
       })
       if (res.ok) {
+        if (typeof window.fbq === 'function') window.fbq('track', 'Lead')
+        if (Array.isArray(window.dataLayer))
+          window.dataLayer.push({ event: 'teklif_form_submit' })
         router.push('/tesekkurler')
       } else {
+        setSubmitError(true)
         setIsSubmitting(false)
       }
     } catch {
+      setSubmitError(true)
       setIsSubmitting(false)
     }
   }
@@ -187,10 +194,13 @@ export default function TeklifPage() {
             {/* Left — copy */}
             <div className="lg:pt-8">
               <AnimateOnScroll>
-                <span className="inline-flex items-center gap-3 text-[10px] tracking-widest3 uppercase text-gold mb-8">
-                  <span className="w-6 h-px bg-gold" />
-                  Ücretsiz Teklif
-                </span>
+                {/* urgency badge */}
+                <div className="inline-flex items-center gap-3 px-4 py-2 border border-gold/25 bg-gold/5 mb-8">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse flex-shrink-0" />
+                  <span className="text-[10px] tracking-widest uppercase text-gold font-light">
+                    Nisan – Mayıs teslimatları için son başvurular alınıyor
+                  </span>
+                </div>
                 <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-cream-light leading-[1.05] mb-6">
                   Oteliniz için
                   <br />
@@ -336,6 +346,20 @@ export default function TeklifPage() {
                     WhatsApp ile Hızlı İletişim
                   </a>
 
+                  {submitError && (
+                    <p className="text-red-600 text-xs text-center font-light">
+                      Bir sorun oluştu. Lütfen{' '}
+                      <a
+                        href="https://wa.me/905320573207"
+                        className="underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        WhatsApp
+                      </a>{' '}
+                      üzerinden ulaşın.
+                    </p>
+                  )}
                   <p className="text-[9px] text-espresso/25 text-center leading-relaxed">
                     Bilgileriniz yalnızca proje görüşmesi için kullanılır. Spam göndermiyoruz.
                   </p>
